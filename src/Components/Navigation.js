@@ -1,6 +1,12 @@
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import LibraryBooksOutlinedIcon from "@material-ui/icons/LibraryBooksOutlined";
+import SubjectIcon from "@material-ui/icons/Subject";
+import GroupIcon from "@material-ui/icons/Group";
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
+import SidebarRow from "./SidebarRow";
+import "../style/sidebar.css";
 export default function Navigation() {
   return (
     <div
@@ -8,20 +14,7 @@ export default function Navigation() {
      border-color-primary full-height"
     >
       <div className="nav-body">
-        <div className="search-bar">
-          <SearchIcon
-            className="searchicon absolute"
-            style={{ fontSize: "22px" }}
-          />
-          <div className="search">
-            <input
-              type="text"
-              className="searchbar full-width white border-all 
-            border-color-third curve"
-              placeholder="Search anything here..."
-            />
-          </div>
-        </div>
+        <div className="search-bar"></div>
         <div>
           <details className="menu noselect">
             <summary
@@ -54,21 +47,43 @@ export default function Navigation() {
             </div>
           </details>
           <div className="border-bottom border-color-primary hr"></div>
-          <div className="menu-list filter-item border-all border-color-primary curve">
-            <div className="menu-items">
-              <span className="menu-list-icon">
-                <LibraryBooksOutlinedIcon
-                  className="icon"
-                  style={{
-                    color: "#aaa",
-                    width: "30px",
-                    textAlign: "left",
-                    position: "absolute",
-                  }}
-                />
-              </span>
-              <span className="menu-list-text">My Desk</span>
-            </div>
+          <div className="list">
+            <SidebarRow
+              Title="My Desk"
+              Icon={LibraryBooksOutlinedIcon}
+              Path="/"
+            />
+            <SidebarRow
+              Title="Explore"
+              Path="/explore"
+              Icon={ExploreOutlinedIcon}
+            />
+            <SidebarRow
+              Title="Subjects"
+              Path="/subjects"
+              id="Subjects"
+              Icon={SubjectIcon}
+            />
+            <SidebarRow
+              Title="Groups"
+              Path="/groups"
+              id="Groups"
+              Icon={GroupIcon}
+            />
+            <SidebarRow
+              Title="Trending"
+              Path="/trending"
+              id="Trending"
+              Icon={TrendingUpIcon}
+            />
+          </div>
+          <div className="border-bottom border-color-primary hr"></div>
+          <div className="search-bar">
+            <input
+              type="text"
+              class="full-width searchbar border-all border-color-third curve"
+              placeholder="Find Something here..."
+            />
           </div>
         </div>
       </div>

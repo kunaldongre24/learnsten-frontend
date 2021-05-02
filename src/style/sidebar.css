@@ -1,0 +1,11 @@
+@import "./index.css";
+
+.sidebar .list {
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}

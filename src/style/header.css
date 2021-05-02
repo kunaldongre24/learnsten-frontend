@@ -1,7 +1,6 @@
 .header {
   height: 80px;
   width: 100%;
-  background-color: #cbd4e9;
   background-repeat: no-repeat;
   background-size: auto 120px;
   background-image: url("../images/stevejobs24.png");
@@ -9,5 +8,6 @@
   position: relative;
   top: 0;
   z-index: 500;
+  background-color: #fff;
   border-bottom: 1px solid #eaeaea;
 }

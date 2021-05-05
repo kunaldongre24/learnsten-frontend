@@ -9,3 +9,10 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
 }
+.sidebar-all .content {
+  width: calc(100% - var(--navbar-width));
+  min-width: calc(100% - 350px);
+  position: absolute;
+  right: 0;
+  height: 1000px;
+}

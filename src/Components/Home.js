@@ -1,11 +1,13 @@
 import React from "react";
+import Sidebar from "./Sidebar";
 import Header from "./Header";
 
-export default function Content() {
+export default function Home() {
   return (
-    <div className="container">
+    <div className="sidebar-all home">
       <div className="content">
         <Header />
+        <Sidebar />
       </div>
     </div>
   );

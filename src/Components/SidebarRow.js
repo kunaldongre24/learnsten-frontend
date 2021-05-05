@@ -1,7 +1,7 @@
 import "../style/sidebarrow.css";
 import { NavLink } from "react-router-dom";
 function SidebarRow(props) {
-  const { Title, Icon, Path, load } = props;
+  const { Title, Icon, Path } = props;
   return (
     <>
       <NavLink to={{ pathname: Path }} exact activeClassName="selected">

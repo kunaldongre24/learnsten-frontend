@@ -9,13 +9,7 @@ body {
   height: 1000px;
   background: #f6f8fa;
 }
-.content {
-  width: calc(100% - var(--navbar-width));
-  min-width: calc(100% - 350px);
-  position: absolute;
-  right: 0;
-  height: 1000px;
-}
+
 .navigation-bar {
   left: 0;
   bottom: 0;

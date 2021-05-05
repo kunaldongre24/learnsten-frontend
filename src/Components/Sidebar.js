@@ -1,12 +1,12 @@
 import React from "react";
-import SearchIcon from "@material-ui/icons/Search";
 import LibraryBooksOutlinedIcon from "@material-ui/icons/LibraryBooksOutlined";
 import SubjectIcon from "@material-ui/icons/Subject";
-import GroupIcon from "@material-ui/icons/Group";
+import GroupOutlinedIcon from "@material-ui/icons/GroupOutlined";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
 import SidebarRow from "./SidebarRow";
 import Profile from "../images/profile.jpeg";
+import { Link } from "react-router-dom";
 import "../style/sidebar.css";
 export default function Navigation() {
   return (
@@ -37,9 +37,9 @@ export default function Navigation() {
                 kunaldongre24
               </span>
               <span className="dropdown-caret"></span>
-              <a className="profile absolute" href="#">
+              <Link className="profile absolute" to={"/profile"}>
                 View My Profile
-              </a>
+              </Link>
             </summary>
             <div className="select-menu-modal border-all border-color-third white">
               <div className="menu-header full-width border-bottom border-color-primary">
@@ -69,7 +69,7 @@ export default function Navigation() {
               Title="Groups"
               Path="/groups"
               id="Groups"
-              Icon={GroupIcon}
+              Icon={GroupOutlinedIcon}
             />
             <SidebarRow
               Title="Trending"
@@ -82,7 +82,7 @@ export default function Navigation() {
           <div className="search-bar">
             <input
               type="text"
-              class="full-width searchbar border-all border-color-third curve"
+              className="full-width searchbar border-all border-color-third curve"
               placeholder="Find Something here..."
             />
           </div>

@@ -6,6 +6,7 @@ import GroupIcon from "@material-ui/icons/Group";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import ExploreOutlinedIcon from "@material-ui/icons/ExploreOutlined";
 import SidebarRow from "./SidebarRow";
+import Profile from "../images/profile.jpeg";
 import "../style/sidebar.css";
 export default function Navigation() {
   return (
@@ -25,7 +26,7 @@ export default function Navigation() {
               role="button"
             >
               <img
-                src="https://avatars.githubusercontent.com/u/65659848?s=60&amp;v=4"
+                src={Profile}
                 alt="@kunaldongre24"
                 size="20"
                 height="20"
@@ -49,7 +50,7 @@ export default function Navigation() {
           <div className="border-bottom border-color-primary hr"></div>
           <div className="list">
             <SidebarRow
-              Title="My Desk"
+              Title="Activity Feed"
               Icon={LibraryBooksOutlinedIcon}
               Path="/"
             />

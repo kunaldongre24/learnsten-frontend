@@ -102,6 +102,7 @@ details.menu[open] > summary::before {
   width: 60px;
   object-fit: cover;
   margin-right: 10px;
+  text-overflow: ellipsis;
 }
 .profile {
   display: block;

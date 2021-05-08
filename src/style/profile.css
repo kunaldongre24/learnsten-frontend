@@ -31,7 +31,7 @@ ul.profile-nav {
 }
 
 ul.profile-nav a {
-  color: #333;
+  color: #24292e;
 }
 ul.profile-nav li {
   display: inline-block;
@@ -43,23 +43,23 @@ ul.profile-nav li {
 }
 ul.profile-nav li:hover {
   border-color: #eaeaea;
-  color: #222;
+  color: #24292e;
   background: #fff;
 }
 ul.profile-nav li svg {
-  color: #888;
+  color: #959da5;
 }
 ul.profile-nav li:hover > svg {
-  color: #222;
+  color: #24292e;
 }
 ul.profile-nav .selected li {
   border-color: #eaeaea;
   border-bottom-color: #fff;
   background: #fff;
-  color: #222;
+  color: #24292e;
 }
 ul.profile-nav .selected li svg {
-  color: #222;
+  color: #24292e;
 }
 .display-profile {
   margin-top: -32px;
@@ -116,11 +116,10 @@ ul.profile-nav .selected li svg {
 .left .name {
   font-size: 26px;
   line-height: 1.25;
-  color: #333;
 }
 .left .username {
   font-size: 20px;
-  color: #666;
+  color: #586069;
   line-height: 1.25;
   word-wrap: break-word;
 }
@@ -133,7 +132,6 @@ ul.profile-nav .selected li svg {
   width: 100%;
   border: 1px solid var(--color-scale-gray3);
   border-radius: 6px;
-  color: #333;
   font-size: 15px;
   margin-bottom: 16px;
   background: #fafbfc;
@@ -146,7 +144,8 @@ ul.profile-nav .selected li svg {
   -moz-box-shadow: 0px 0px 0px 3px rgba(4, 190, 214, 0.3);
 }
 .follow-button:hover {
-  background: #f1f2f3;
+  background: #f2f3f6;
+  transition: 0.2s ease;
 }
 .nc {
   padding-top: 16px;
@@ -158,7 +157,6 @@ ul.profile-nav .selected li svg {
   word-wrap: break-word;
   margin-bottom: 16px;
   width: 100%;
-  color: #333;
 }
 .box {
   font-size: 14px;
@@ -168,16 +166,15 @@ ul.profile-nav .selected li svg {
   float: left;
   margin-right: 4px;
   margin-top: 1px;
-  fill: #6a737d;
+  fill: #959da5;
 }
 .box .num {
-  color: #222;
+  color: #24292e;
 }
 .extra-info {
   padding-top: 16px;
   padding-bottom: 16px;
   font-size: 14px;
-  color: #333;
 }
 .line {
   display: block;

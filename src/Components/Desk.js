@@ -1,5 +1,7 @@
 import React from "react";
 
-export default function Desk() {
+function Desk() {
   return <div>Hello there this is the Desk page.</div>;
 }
+
+export default Desk;

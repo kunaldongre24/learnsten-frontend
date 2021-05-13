@@ -4,12 +4,13 @@
   flex-wrap: wrap;
   flex-direction: column;
   flex-basis: 100%;
-  color: #000;
   cursor: pointer;
   font-size: 14px;
   height: 35px;
   box-sizing: border-box;
   border: 1px solid transparent;
+  color: #24292e;
+  vertical-align: middle;
 }
 a {
   text-decoration: none;
@@ -23,13 +24,16 @@ a {
   background: #008799;
 }
 
-.navigation-bar .list-icon svg,
-.navigation-bar .list-icon svg path {
+.navigation-bar .list-icon svg path,
+.navigation-bar .list-icon svg {
   visibility: visible;
   font-size: 25px;
   text-align: center;
-  margin-top: 0;
-  margin-bottom: -2px;
+  vertical-align: middle;
+  color: #6a737d;
+}
+.selected .list-icon svg path {
+  color: #fff !important;
 }
 .navigation-bar .contain-element {
   display: flex;
@@ -41,5 +45,4 @@ a {
 }
 .navigation-bar .list-desc {
   margin-left: 20px;
-  margin-top: -2px;
 }

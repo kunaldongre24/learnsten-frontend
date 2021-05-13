@@ -143,3 +143,8 @@ details.menu[open] > summary::before {
     transform: translateY(0px);
   }
 }
+.home-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}

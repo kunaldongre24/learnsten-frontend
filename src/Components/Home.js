@@ -8,9 +8,9 @@ import Explore from "./Explore";
 export default function Home() {
   return (
     <div className="sidebar-all home">
+      <Sidebar />
       <div className="content">
         <Header />
-        <Sidebar />
         <div className="home-container">
           <Switch>
             <Route path="/" exact component={ActivityFeed} />

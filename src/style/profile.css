@@ -15,7 +15,7 @@ body {
 .profile-head {
   background-color: #f6f8fa;
   top: 0;
-  border-color: #eaeaea;
+  border-color: #e2e2e2;
   z-index: 3;
   position: sticky;
 }
@@ -26,23 +26,23 @@ body {
 }
 ul.profile-nav {
   list-style: none;
-  font-size: 14px;
+  font-size: 15px;
   width: 100%;
 }
 
 ul.profile-nav a {
-  color: #24292e;
+  color: #586069;
 }
 ul.profile-nav li {
   display: inline-block;
-  padding: 12px 16px;
+  padding: 8px 16px;
   margin-bottom: -1px;
   border: 1px solid transparent;
   border-bottom: 2px solid transparent;
   margin-left: 1px;
 }
 ul.profile-nav li:hover {
-  border-color: #eaeaea;
+  border-color: #e2e2e2;
   color: #24292e;
   background: #fff;
 }
@@ -53,23 +53,25 @@ ul.profile-nav li:hover > svg {
   color: #24292e;
 }
 ul.profile-nav .selected li {
-  border-color: #eaeaea;
+  border-color: #e2e2e2;
   border-bottom-color: #fff;
   background: #fff;
   color: #24292e;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 ul.profile-nav .selected li svg {
   color: #24292e;
 }
 .display-profile {
-  margin-top: -32px;
+  margin-top: -42px;
 }
 .head li {
   border-color: transparent !important;
   margin-bottom: 0px !important;
 }
 .head li:hover {
-  border-bottom-color: #eaeaea !important;
+  border-bottom-color: #e2e2e2 !important;
 }
 .head .selected li {
   border-bottom-color: orange !important;
@@ -77,7 +79,7 @@ ul.profile-nav .selected li svg {
 }
 /* 
 .ph-con div {
-  border: 1px solid #eaeaea;
+  border: 1px solid #e2e2e2;
 } */
 .cn {
   max-width: 1280px;
@@ -106,7 +108,7 @@ ul.profile-nav .selected li svg {
   z-index: 4;
   position: relative;
   border-radius: 50%;
-  border: 1px solid #eaeaea;
+  border: 1px solid #e2e2e2;
 }
 .cn .expand {
   display: flex;
@@ -128,15 +130,15 @@ ul.profile-nav .selected li svg {
   margin-top: -6px;
 }
 .follow-button {
-  height: 32px;
+  height: 35px;
   width: 100%;
   border: 1px solid var(--color-scale-gray3);
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 4px;
+  font-size: 15px;
   margin-bottom: 16px;
-  background: #fafbfc;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #434446;
+  cursor: pointer;
+  background: linear-gradient(to bottom, #f9fafc, #f0f3f6);
 }
 .follow-button:focus {
   border-color: #007e8f;
@@ -173,17 +175,19 @@ ul.profile-nav .selected li svg {
 .box .num {
   color: #24292e;
 }
+.box span {
+  white-space: nowrap;
+}
 .extra-info {
   padding-top: 16px;
   padding-bottom: 16px;
   font-size: 14px;
 }
 .line {
-  display: block;
-  padding-top: 4px;
+  display: flex;
+  white-space: nowrap;
 }
 .line svg {
-  float: left;
   margin-right: 6px;
   margin-top: 1px;
   fill: #6a737d;
@@ -195,4 +199,8 @@ ul.profile-nav .selected li svg {
 .top-hd {
   width: 100%;
   height: 0px;
+}
+.line .text {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

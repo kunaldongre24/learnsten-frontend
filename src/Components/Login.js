@@ -1,12 +1,11 @@
 import React from "react";
-import Header from "./Header";
 import "../style/Login.css";
 import MainPage from "./MainPage";
+import { Link } from "react-router-dom";
 
 function Login() {
   return (
     <>
-      <Header />
       <div className="login">
         <div className="login-container navigation-bar">
           <div className="error box">Login or username incorrect.</div>
@@ -37,7 +36,7 @@ function Login() {
             />
           </form>
           <div class="box">
-            New to Learnsten? <a href="signup">Create an account</a>
+            New to Learnsten? <Link to="/login/signup">Create an account</Link>
           </div>
         </div>
         <MainPage />

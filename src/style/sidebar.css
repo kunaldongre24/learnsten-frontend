@@ -12,7 +12,12 @@
 .sidebar-all .content {
   width: calc(100% - var(--navbar-width));
   min-width: calc(100% - 350px);
-  position: absolute;
-  right: 0;
+  background-color: #f6f8fa;
   height: 1000px;
+  right: 0;
+}
+.sidebar-all {
+  display: flex;
+  min-height: 100vh;
+  height: auto;
 }

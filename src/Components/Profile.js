@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import "../style/NoSidebar.css";
 import "../style/profile.css";
-import Header from "./Header";
 import Desk from "./Desk";
 import Activities from "./Activities";
 import School from "./School";
@@ -38,7 +37,6 @@ export default function Profile() {
   return (
     <div className="profile-all no-sidebar">
       <div className="content">
-        <Header />
         <div className="space"></div>
         <div className="profile-head full-width border-bottom" ref={ref}>
           <div className="cn">
@@ -112,7 +110,6 @@ export default function Profile() {
                   </span>
                 </div>
                 <div className="extra-info">
-                  {" "}
                   <div className="company line">
                     <span class="icon">
                       <svg

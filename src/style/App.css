@@ -3,22 +3,28 @@
 * {
   box-sizing: border-box;
 }
-body {
+body,
+html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background: #f6f8fa;
   line-height: 1.5;
   color: #24292e;
 }
-.App {
+button,
+a,
+input[type="button"],
+input[type="submit"] {
+  cursor: pointer;
 }
 .navigation-bar {
+  top: 0;
   left: 0;
-  bottom: 0;
   width: var(--navbar-width);
   z-index: 999;
   box-sizing: border-box;
-  border-width: 2px !important;
+  border-width: 1px !important;
+  position: static;
+  display: block;
 }
 .searchbar:focus {
   border-color: rgb(0, 126, 143);
@@ -146,4 +152,8 @@ details.menu[open] > summary::before {
   width: 100%;
   height: 100%;
   padding: 10px;
+}
+.top {
+  height: 0px;
+  width: 0px;
 }

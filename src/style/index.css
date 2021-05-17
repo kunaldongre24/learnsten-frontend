@@ -41,7 +41,7 @@
 }
 /* position */
 .fixed {
-  position: fixed;
+  position: fixed !important;
 }
 .absolute {
   position: absolute;
@@ -67,7 +67,7 @@ a {
 /* navbar-width */
 
 @media (min-width: 768px) {
-  .navigation-bar {
+  .side-container {
     max-width: 350px;
     padding-right: 24px;
     padding-left: 24px;
@@ -78,7 +78,7 @@ a {
 }
 
 @media (min-width: 1012px) {
-  .navigation-bar {
+  .side-container {
     max-width: 350px;
     padding-right: 32px;
     padding-left: 32px;

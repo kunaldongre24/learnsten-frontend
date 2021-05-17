@@ -12,11 +12,13 @@
   color: #24292e;
   vertical-align: middle;
 }
-a {
-  text-decoration: none;
-  color: #0366d6;
+.navigation-bar a {
+  text-decoration: none !important;
 }
-.navigation-bar .list-element:hover {
+.navigation-bar a.profile:hover {
+  text-decoration: underline !important;
+}
+.navigation-bar .navigation-bar .list-element:hover {
   background-color: rgba(4, 190, 214, 0.2);
 }
 .navigation-bar .selected .list-element {

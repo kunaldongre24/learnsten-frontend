@@ -4,30 +4,46 @@ import "../style/Signup.css";
 function Signup() {
   return (
     <div>
+      <h1 className="shead">Create An Account</h1>
       <form className="signup-form">
-        <label for="password">Username or email address</label>
+        <label for="password">Username</label>
         <input
           type="text"
           className="username light-blue"
           required
           id="login"
-          name="login"
+          placeholder="Username"
+          name="newlogin"
+        />
+        <label for="email">Email address</label>
+        <input
+          type="email"
+          className="email light-blue"
+          required
+          id="email"
+          placeholder="Email address"
+          name="newemail"
         />
         <label for="password">Password</label>
-        <a>Forgot Password?</a>
         <input
           type="password"
           className="password light-blue"
           required
           id="password"
-          name="password"
+          placeholder="Password"
+          name="newpassword"
         />
+        <div className="terms">
+          By clicking Sign Up, you agree to our <a>Terms</a>, <a>Data Policy</a>{" "}
+          and <a>Cookie Policy</a>. You may receive SMS notifications from us
+          and can opt out at any time.
+        </div>
         <input
           type="submit"
           required
-          name="submit"
-          value="Login"
-          className="loginBtn"
+          name="Register"
+          value="Sign Up"
+          className="register"
         />
       </form>
     </div>

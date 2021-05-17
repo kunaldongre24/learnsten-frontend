@@ -24,6 +24,7 @@
   background: #007e8f;
   color: #fff;
   border-radius: 4px;
+  height: auto !important;
 }
 .signup:hover {
   text-decoration: none;

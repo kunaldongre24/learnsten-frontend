@@ -149,7 +149,6 @@ ul.profile-nav .selected li svg {
 }
 .follow-button:hover {
   background: #f2f3f6;
-  transition: 0.2s ease;
 }
 .nc {
   padding-top: 16px;

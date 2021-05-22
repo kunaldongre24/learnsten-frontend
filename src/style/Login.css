@@ -26,10 +26,29 @@ a:hover {
   text-align: center;
 }
 .login .error {
-  border-color: #e77575;
-  background: #f3cbcb;
+  border: 1px solid #ecbbbf;
+  background: #ffe3e6;
+  margin-top: 16px;
+  text-align: left;
+}
+.login .error .close {
+  float: right;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.error .close svg {
+  fill: rgba(158, 28, 35, 0.6);
+  margin-top: 3px;
+  height: 16px;
+  width: 16px;
+}
+.err-text {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.hidden {
   display: none;
-  margin-bottom: 24px;
 }
 .login-form {
   width: 100%;
@@ -37,7 +56,7 @@ a:hover {
   background-color: #f6f8fa;
   border: 1px solid #e2e2e2;
   margin-bottom: 20px;
-  margin-top: 50px;
+  margin-top: 16px;
 }
 .login-form input {
   display: block;

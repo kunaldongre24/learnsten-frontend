@@ -1,9 +1,8 @@
 .login {
   color: #333;
-  max-width: 1280px;
-  margin: auto;
-  display: flex;
   margin-top: 5px;
+  width: 350px;
+  margin: auto;
 }
 a:hover {
   text-decoration: underline;
@@ -11,12 +10,16 @@ a:hover {
 }
 .login .login-container {
   font-size: 14px;
-  float: left;
   padding-right: 5px;
 }
-.login .box {
+.loadingBtn {
+  background: #a7d49c !important;
+  border-color: #709e66 !important;
+  cursor: default !important;
+}
+.login .box,
+.signup .box {
   padding: 15px 20px;
-  width: 100%;
   margin-bottom: 20px;
   background-color: #fff;
   color: #333;
@@ -32,8 +35,9 @@ a:hover {
   width: 100%;
   padding: 20px;
   background-color: #f6f8fa;
-  border: 1px solid #c5c5c5;
+  border: 1px solid #e2e2e2;
   margin-bottom: 20px;
+  margin-top: 50px;
 }
 .login-form input {
   display: block;

@@ -5,6 +5,7 @@ import Header from "./Header";
 import PageNotFound from "./PageNotFound";
 import { Route, Switch } from "react-router";
 import Login from "./Login";
+import Signup from "./Signup";
 
 export default function Content() {
   return (
@@ -12,6 +13,7 @@ export default function Content() {
       <Header />
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
         <Route path="/profile" component={Profile} />
         <Route path="/" component={Home} />
       </Switch>

@@ -1,16 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import "../style/Login.css";
-import MainPage from "./MainPage";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
+  const [Loader, setLoader] = useState(false);
+  const [Error, setError] = useState(false);
+  const loginApi = async (e) => {
+    setLoader(true);
+    e.preventDefault();
+    const request = {
+      user: document.getElementById("login").value,
+      password: document.getElementById("password").value,
+    };
+    const result = await axios.post(
+      "http://localhost:8000/api/v1/auth/login",
+      request
+    );
+
+    if (result.data.message) console.log(result.data.message);
+    else if (result.data.err) console.log(result.data.err);
+    else console.log(result.data);
+    setLoader(false);
+  };
   return (
     <>
       <div className="login">
-        <div className="login-container navigation-bar">
+        <div className="login-container ">
           <div className="error box">Login or username incorrect.</div>
-          <form className="login-form">
-            <label for="password">Username or email address</label>
+          <form
+            onSubmit={(e) => {
+              loginApi(e);
+            }}
+            className="login-form"
+            method="post"
+          >
+            <label htmlFor="password">Username or email address</label>
             <input
               type="text"
               className="username light-blue"
@@ -18,7 +43,7 @@ function Login() {
               id="login"
               name="login"
             />
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <a>Forgot Password?</a>
             <input
               type="password"
@@ -31,15 +56,14 @@ function Login() {
               type="submit"
               required
               name="submit"
-              value="Login"
-              className="loginBtn"
+              value={Loader ? `Signing in...` : `Sign in`}
+              className={`register ${Loader ? `loadingBtn` : ``}`}
             />
           </form>
-          <div class="box">
-            New to Learnsten? <Link to="/login/signup">Create an account</Link>
+          <div className="box">
+            New to Learnsten? <Link to="/signup">Create an account</Link>
           </div>
         </div>
-        <MainPage />
       </div>
     </>
   );

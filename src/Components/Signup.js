@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../style/Signup.css";
 
 function Signup() {
   return (
-    <div>
+    <div className="signup">
       <h1 className="shead">Create An Account</h1>
       <form className="signup-form">
         <label for="password">Username</label>
@@ -46,6 +47,9 @@ function Signup() {
           className="register"
         />
       </form>
+      <div class="box">
+        Already a user ? <Link to="/login">Login</Link>
+      </div>
     </div>
   );
 }

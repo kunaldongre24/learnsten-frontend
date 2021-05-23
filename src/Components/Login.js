@@ -52,30 +52,36 @@ function Login() {
             className="login-form"
             method="post"
           >
-            <label htmlFor="password">Username or email address</label>
-            <input
-              type="text"
-              className="username light-blue"
-              required
-              id="login"
-              name="login"
-            />
-            <label htmlFor="password">Password</label>
-            <a>Forgot Password?</a>
-            <input
-              type="password"
-              className="password light-blue"
-              required
-              id="password"
-              name="password"
-            />
-            <input
-              type="submit"
-              required
-              name="submit"
-              value={Loader ? `Signing in...` : `Sign in`}
-              className={`register ${Loader ? `loadingBtn` : ``}`}
-            />
+            <div>
+              <label htmlFor="password">Username or email address</label>
+              <input
+                type="text"
+                className="username light-blue"
+                required
+                id="login"
+                name="login"
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <a>Forgot Password?</a>
+              <input
+                type="password"
+                className="password light-blue"
+                required
+                id="password"
+                name="password"
+              />
+            </div>
+            <div>
+              <input
+                type="submit"
+                required
+                name="submit"
+                value={Loader ? `Signing in...` : `Sign in`}
+                className={`register loginBtn${Loader ? `loadingBtn` : ``}`}
+              />
+            </div>
           </form>
           <div className="box">
             New to Learnsten? <Link to="/signup">Create an account</Link>

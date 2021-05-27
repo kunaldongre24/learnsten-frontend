@@ -9,8 +9,8 @@ function Desk() {
       <h2 className="heading">Popular Courses</h2>
       <ol className="courses">
         {[...Array(n)].map((e, i) => (
-          <li>
-            <span className="showCard" key={i}></span>
+          <li key={i}>
+            <span className="showCard"></span>
           </li>
         ))}
       </ol>

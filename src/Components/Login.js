@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../style/Login.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from "./UserContext";
 
 function Login() {
+  const { setUser } = useContext(UserContext);
+
   const [Loader, setLoader] = useState(false);
   const [Error, setError] = useState(false);
   const loginApi = async (e) => {
@@ -18,10 +21,9 @@ function Login() {
       request,
       { withCredentials: true }
     );
-    const { message, err } = result.data;
-    if (message) console.log(message);
+    const { login, user, err } = result.data;
+    if (login) setUser(user);
     else if (err) setError(err);
-    else console.log(result.data);
     setLoader(false);
   };
   return (
@@ -53,7 +55,7 @@ function Login() {
             method="post"
           >
             <div>
-              <label htmlFor="password">Username or email address</label>
+              <label htmlFor="password">Username or password</label>
               <input
                 type="text"
                 className="username light-blue"

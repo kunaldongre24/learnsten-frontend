@@ -7,19 +7,23 @@ export const UserContext = createContext({});
 const GetUser = () => {
   const { user, setUser } = useContext(UserContext);
   useEffect(() => {
-    async function fetchUser() {
-      const response = await axios.get(
-        "http://localhost:8000/api/v1/auth/login",
-        {
-          withCredentials: true,
+    try {
+      async function fetchUser() {
+        const response = await axios.get(
+          "http://localhost:8000/api/v1/auth/login",
+          {
+            withCredentials: true,
+          }
+        );
+        if (response.data.loggedIn) {
+          const result = await getUserById(response.data.user);
+          setUser(result);
         }
-      );
-      if (response.data.loggedIn) {
-        const result = await getUserById(response.data.user);
-        setUser(result);
       }
+      fetchUser();
+    } catch {
+      console.log("there is some error");
     }
-    fetchUser();
   }, [UserContext]);
 
   return user;

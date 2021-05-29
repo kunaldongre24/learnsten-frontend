@@ -6,19 +6,24 @@ import { Route, Switch } from "react-router";
 import Login from "./Login";
 import Signup from "./Signup";
 import { UserContext } from "./UserContext";
+import PrivateRoute from "./PrivateRoute";
 
 export default function Content() {
   const [user, setUser] = useState({});
   const providerValue = useMemo(() => ({ user, setUser }), [user, setUser]);
   return (
     <div className="container">
-      <Header />
       <UserContext.Provider value={providerValue}>
+        <Header />
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/:username" component={Profile} />
-          <Route path="/" component={Home} />
+          <PrivateRoute exact path="/" component={Home} />
+          <PrivateRoute path="/explore" component={Home} />
+          <PrivateRoute path="/subjects" component={Home} />
+          <PrivateRoute path="/groups" component={Home} />
+          <PrivateRoute path="/trending" component={Home} />
+          <PrivateRoute path="/:username" component={Profile} />
         </Switch>
       </UserContext.Provider>
     </div>

@@ -3,8 +3,10 @@ import "../style/Login.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "./UserContext";
+import { useHistory } from "react-router-dom";
 
 function Login() {
+  const history = useHistory();
   const { setUser } = useContext(UserContext);
 
   const [Loader, setLoader] = useState(false);
@@ -22,8 +24,10 @@ function Login() {
       { withCredentials: true }
     );
     const { login, user, err } = result.data;
-    if (login) setUser(user);
-    else if (err) setError(err);
+    if (login) {
+      setUser(user);
+      history.push("/");
+    } else if (err) setError(err);
     setLoader(false);
   };
   return (

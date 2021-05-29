@@ -55,6 +55,9 @@ details > summary {
   cursor: pointer;
   width: max-content;
 }
+details.menu {
+  position: relative;
+}
 details.menu > summary::-webkit-details-marker {
   display: none;
   cursor: pointer !important;
@@ -72,19 +75,26 @@ details.menu[open] > summary::before {
   background: transparent;
 }
 .dropdown-caret {
-  display: inline;
+  white-space: nowrap;
   width: 0;
   height: 0;
-  vertical-align: middle;
   content: "";
+  position: absolute;
+  transform: translate(0, 7px);
   border-top-style: solid;
   border-top-width: 4px;
   border-right: 4px solid transparent;
   border-bottom: 0 solid transparent;
-  position: absolute;
   border-left: 4px solid transparent;
-  transform: translate(0px, 7px);
+  white-space: nowrap;
+  font-size: 14px;
 }
+.option-header .dropdown-caret {
+  position: relative;
+  transform: translate(0, -6px);
+  display: inline-block;
+}
+
 .css-truncate.css-truncate-target,
 .css-truncate .css-truncate-target {
   display: inline-block;
@@ -119,6 +129,26 @@ details.menu[open] > summary::before {
   animation: tobottom 0.12s ease;
   position: absolute;
 }
+.select-menu-modal-left {
+  width: 300px;
+  height: 200px;
+  max-height: 480px;
+  box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2);
+  animation: tobottom 0.12s ease;
+  position: relative;
+  border-radius: 4px;
+}
+.details-menu {
+  z-index: 99;
+  display: flex;
+  top: auto;
+  left: auto;
+  right: 0;
+  bottom: auto;
+  position: absolute;
+  padding: 0;
+  margin-top: 8px;
+}
 .menu-header {
   padding: 7px 7px 7px 16px;
   font-size: 13px;
@@ -126,6 +156,10 @@ details.menu[open] > summary::before {
 .hr {
   margin-top: 16px;
   margin-bottom: 16px;
+}
+.option-header:hover,
+[open] > .option-header {
+  background: #f5f5f5;
 }
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -136,6 +170,17 @@ details.menu[open] > summary::before {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
+.option-header {
+  margin-right: 4px;
+  padding-left: 12px;
+  padding-right: 12px;
+  height: 32px;
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 5px 12px;
+  line-height: 27px;
+}
+
 .menu-list-text {
   font-size: 14px;
 }
@@ -156,4 +201,22 @@ details.menu[open] > summary::before {
 .top {
   height: 0px;
   width: 0px;
+}
+input::placeholder,
+textarea::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #6a737d;
+  opacity: 1; /* Firefox */
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #6a737d;
+}
+
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #6a737d;
 }

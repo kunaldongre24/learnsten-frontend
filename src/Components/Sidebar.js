@@ -8,7 +8,16 @@ import SidebarRow from "./SidebarRow";
 import Profile from "../images/wl.jpeg";
 import { Link } from "react-router-dom";
 import "../style/sidebar.css";
+import GetUser from "./UserContext";
+
 export default function Navigation() {
+  var c_user, c_id;
+  const user_data = GetUser();
+  if (user_data.data) {
+    c_user = user_data.data[0].username;
+    c_id = user_data.data[0].id;
+  }
+
   const [isSticky, setSticky] = useState(false);
   const ref = useRef(null);
   const handleScroll = () => {
@@ -60,7 +69,7 @@ export default function Navigation() {
                     kunaldongre24
                   </span>
                   <span className="dropdown-caret"></span>
-                  <Link className="profile absolute" to={"/profile"}>
+                  <Link className="profile absolute" to={`/${c_user}`}>
                     View My Profile
                   </Link>
                 </summary>

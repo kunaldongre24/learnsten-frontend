@@ -18,6 +18,7 @@ export async function getUserById(userId) {
   );
   return response;
 }
+
 // export async function login(id) {
 //   return await resolve(
 //     axios.get(`http://some-api.com/users/${id}`).then((res) => res.data)

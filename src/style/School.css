@@ -1,0 +1,25 @@
+.school {
+  width: 100%;
+}
+.school-header {
+  display: flex;
+}
+.find-school {
+  border-radius: 4px;
+  height: 32px;
+  width: 100%;
+  border: 1px solid #dbdbdb;
+  box-sizing: border-box;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin-right: 12px;
+}
+.new-school {
+  height: 32px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border: 1px solid #dbdbdb;
+  background: #0095f6;
+  color: #fff;
+  border-radius: 4px;
+}

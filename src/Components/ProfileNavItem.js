@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 function ProfileNavItem(props) {
-  const { Title, Icon, Path } = props;
+  const { Title, Icon, Path, exact } = props;
   const icon = {
     height: "18px",
     width: "18px",
@@ -10,7 +10,7 @@ function ProfileNavItem(props) {
   };
   return (
     <>
-      <NavLink to={{ pathname: Path }} exact activeClassName="selected">
+      <NavLink to={{ pathname: Path }} exact={exact} activeClassName="selected">
         <li>
           <Icon style={icon} />
           {Title}

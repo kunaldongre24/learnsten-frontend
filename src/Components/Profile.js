@@ -24,6 +24,7 @@ export default function Profile(props) {
     c_user = user_data.data[0].username;
     c_id = user_data.data[0].id;
   }
+  console.log(c_user);
   const [user, setUser] = useState({});
   // @TODO add the value of username inside the cookie.....
   const Username = props.match.params.username;
@@ -112,6 +113,7 @@ export default function Profile(props) {
                   <ProfileNavItem
                     Path={`/${username}`}
                     Title="Desk"
+                    exact
                     Icon={ImportContactsOutlinedIcon}
                   />
                   <ProfileNavItem
@@ -380,7 +382,12 @@ export default function Profile(props) {
                   path={`/${username}/activities`}
                   component={Activities}
                 />
-                <Route path={`/${username}/school`} component={School} />
+                <Route
+                  path={`/${username}/school`}
+                  render={() => (
+                    <School username={username} isMyProfile={my_profile} />
+                  )}
+                />
                 <Route path={`/${username}/notes`} component={Notes} />
               </div>
             </div>

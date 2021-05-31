@@ -22,7 +22,7 @@
   background-color: rgba(4, 190, 214, 0.2);
 }
 .navigation-bar .selected .list-element {
-  border-radius: 4px;
+  border-radius: 6px;
   color: #fff;
   background: #008799;
 }

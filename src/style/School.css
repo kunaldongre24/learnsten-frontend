@@ -1,25 +1,37 @@
 .school {
   width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 .school-header {
   display: flex;
 }
 .find-school {
-  border-radius: 4px;
+  border-radius: 6px;
   height: 32px;
   width: 100%;
   border: 1px solid #dbdbdb;
   box-sizing: border-box;
   padding-left: 12px;
   padding-right: 12px;
+  box-shadow: inset 0 1px 0 rgba(225, 228, 232, 0.2);
   margin-right: 12px;
 }
 .new-school {
-  height: 32px;
+  max-height: 32px;
   padding-left: 12px;
   padding-right: 12px;
   border: 1px solid #dbdbdb;
-  background: #0095f6;
+  background: #4ca44f;
   color: #fff;
-  border-radius: 4px;
+  border-radius: 6px;
+  display: flex;
+  font-size: 14px;
+  line-height: 30px;
+  margin-left: 10px;
+}
+.new-school svg {
+  width: 18px;
+  margin-top: 2px;
+  margin-right: 5px;
 }

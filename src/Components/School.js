@@ -1,24 +1,23 @@
 import React from "react";
 import "../style/School.css";
-import SummaryBox from "./SummaryBox";
-import SchoolOutlinedIcon from "@material-ui/icons/SchoolOutlined";
+import { Route } from "react-router-dom";
+import { isEmpty } from "./Utils";
+import SchoolList from "./SchoolList";
+import NewSchool from "./NewSchool";
 
-export default function School() {
+export default function School(props) {
+  const { username, isMyProfile } = props;
   return (
     <div className="school">
-      <div>
-        <div className="school-header">
-          <input
-            type="text"
-            className="find-school"
-            placeholder="Find a school..."
-          />
-          <SummaryBox text="Type" modalHeader="something" />
-          <SummaryBox text="Subject" modalHeader="something" />
-          <SummaryBox text="Sort" modalHeader="something" />
-          <button className="new-school">New</button>
-        </div>
-      </div>
+      <Route
+        path={`/${username}/school`}
+        exact
+        render={() => <SchoolList {...props} />}
+      />
+      <Route
+        path={`/${username}/school/new`}
+        render={() => <NewSchool {...props} />}
+      />
     </div>
   );
 }

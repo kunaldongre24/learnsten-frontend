@@ -1,0 +1,83 @@
+.NewSchool {
+  width: 100%;
+  height: auto;
+  border: 1px solid #dbdbdb;
+  padding: 30px;
+  border-radius: 6px;
+}
+.NewSchool .username {
+  width: 300px;
+}
+.create-school-form input {
+  display: block;
+  margin-top: 7px;
+  height: 34px;
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 20px;
+  border: 1px solid #ccd0d5;
+  border-radius: 6px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: 14px;
+  background: #fafbfc;
+  box-shadow: inset 0 1px 0 rgba(225, 228, 232, 0.2);
+  padding-right: 40px;
+}
+.create-school-form label {
+  font-size: 14px;
+}
+.create-school-form .register {
+  width: 200px;
+  background: #4ca44f !important;
+  box-shadow: none;
+  border-color: #429048;
+}
+.create-school-form .row {
+  display: flex;
+}
+.of {
+  font-size: 30px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 24px;
+  color: #aaa;
+}
+.summary-image {
+  border-radius: 50%;
+  margin-right: 4px;
+}
+.NewSchool .shead {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+.sub-head {
+  color: #586069;
+  font-size: 14px;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ebedef;
+}
+.NewSchool .flex {
+  display: flex;
+}
+.NewSchool input[type="radio"] {
+  width: 15px;
+}
+.NewSchool .privacy-info {
+  color: #586069;
+  font-size: 12px;
+}
+.NewSchool .privacy-icon svg {
+  height: 32px;
+  width: 32px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 4px;
+}
+.privacy {
+  padding: 10px 0;
+  border-top: 1px solid #ebedef;
+  border-bottom: 1px solid #ebedef;
+}

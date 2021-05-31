@@ -17,7 +17,7 @@ ol.courses li {
   height: 100%;
   border: 1px solid #e6d8d8;
   display: block;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 .heading {
   font-weight: 400 !important;

@@ -141,12 +141,13 @@ ul.profile-nav .selected li svg {
   height: 35px;
   width: 100%;
   border: 1px solid var(--color-scale-gray3);
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 14px;
   margin-bottom: 16px;
   color: #fff;
   cursor: pointer;
-  background: #0095f6;
+  background: #1671e6;
+  font-family: Verdana, Helvetica, Arial, sans-serif;
 }
 input:focus,
 textarea:focus,
@@ -216,30 +217,32 @@ button:focus {
 }
 .editInfo input,
 textarea {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #24292e;
 }
 .edit-bio {
   width: 100%;
   border: 1px solid #dbdbdb;
   resize: vertical;
   height: 70px;
-  border-radius: 4px;
+  border-radius: 6px;
   outline: none;
   box-sizing: border-box;
   padding: 8px;
   line-height: 1.5;
-  font-size: 13px;
+  font-size: 14px;
+  color: #24292e;
 }
 .edit-info {
   width: 100%;
   height: 28px;
   border: 1px solid #dbdbdb;
   margin-top: 8px;
-  border-radius: 4px;
+  border-radius: 6px;
   padding-left: 12px;
   padding-right: 12px;
   font-size: 12px;
+  color: #24292e;
   margin-left: 10px;
 }
 .input-container {
@@ -259,9 +262,9 @@ textarea {
 .edit-button input {
   font-size: 12px;
   padding: 5px 12px;
-  border-radius: 4px;
+  border-radius: 6px;
   border: 1px solid #dbdbdb;
-  background: #0095f6;
+  background: #1671e6;
   color: #fff;
 }
 .edit-button input.cancelEdit {

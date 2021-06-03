@@ -5,8 +5,9 @@ import ProfileImage from "../images/wl.jpeg";
 import SummaryBox from "./SummaryBox";
 
 function NewSchool(props) {
-  const [nameValid, setNameValid] = useState({});
   const { username } = props;
+  const [nameValid, setNameValid] = useState({});
+  const [Error, setError] = useState(false);
   const [Loader, setLoader] = useState(false);
   const validateName = async (e) => {
     const request = { name: e.target.value };
@@ -17,6 +18,28 @@ function NewSchool(props) {
     );
     setNameValid(result.data);
   };
+  const createNewSchool = async (e) => {
+    setLoader(true);
+    e.preventDefault();
+    const request = {
+      name: document.getElementById("schoolName").value,
+      description: document.getElementById("description").value,
+      privacy: document.querySelector('input[name="privacy"]:checked').value,
+    };
+    const result = await axios.post(
+      "http://localhost:8000/api/v1/school/",
+      request,
+      { withCredentials: true }
+    );
+    const { message, err } = result.data;
+    if (err) setError(err);
+    if (message) {
+      if (message === "success") {
+        return props.history.push(`/${username}/school/`);
+      }
+    }
+    setLoader(false);
+  };
   return (
     <div className="NewSchool">
       <h1 className="shead">Create New School</h1>
@@ -24,7 +47,31 @@ function NewSchool(props) {
         A school contains of all the courses, including notes. You can create
         multiple schools for different subjects or one for all.
       </div>
-      <form className="create-school-form" autoComplete="off">
+      <div className={`error box ${Error ? `` : `hidden`}`}>
+        <div className="err-text">
+          {Error}
+          <button className="close" onClick={() => setError(false)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="18px"
+              viewBox="0 0 24 24"
+              width="18px"
+              fill="#000000"
+            >
+              <path d="M0 0h24v24H0V0z" fill="none" />
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <form
+        className="create-school-form"
+        autoComplete="off"
+        onSubmit={(e) => {
+          createNewSchool(e);
+        }}
+        method="post"
+      >
         <div className="row">
           <span>
             <label htmlFor="owner">
@@ -82,13 +129,7 @@ function NewSchool(props) {
         />
         <div className="privacy">
           <div className="flex">
-            <input
-              type="radio"
-              value="public"
-              name="privacy"
-              defaultChecked
-              id="public"
-            />
+            <input type="radio" value="0" name="privacy" defaultChecked />
             <div className="privacy-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +151,7 @@ function NewSchool(props) {
             </div>
           </div>
           <div className="flex">
-            <input type="radio" value="private" name="privacy" id="private" />
+            <input type="radio" value="1" name="privacy" />
             <div className="privacy-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

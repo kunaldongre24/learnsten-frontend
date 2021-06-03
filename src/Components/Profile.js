@@ -24,7 +24,6 @@ export default function Profile(props) {
     c_user = user_data.data[0].username;
     c_id = user_data.data[0].id;
   }
-  console.log(c_user);
   const [user, setUser] = useState({});
   // @TODO add the value of username inside the cookie.....
   const Username = props.match.params.username;
@@ -38,6 +37,7 @@ export default function Profile(props) {
     fetchData();
   }, [Username]); //getting user details by username
   const {
+    id,
     name,
     username,
     email,
@@ -385,7 +385,12 @@ export default function Profile(props) {
                 <Route
                   path={`/${username}/school`}
                   render={() => (
-                    <School username={username} isMyProfile={my_profile} />
+                    <School
+                      username={username}
+                      userId={id}
+                      isMyProfile={my_profile}
+                      {...props}
+                    />
                   )}
                 />
                 <Route path={`/${username}/notes`} component={Notes} />

@@ -81,3 +81,8 @@
   border-top: 1px solid #ebedef;
   border-bottom: 1px solid #ebedef;
 }
+.last-row {
+  color: #586069;
+  font-size: 12px;
+  padding-top: 8px;
+}

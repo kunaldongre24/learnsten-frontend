@@ -18,7 +18,15 @@ export async function getUserById(userId) {
   );
   return response;
 }
-
+export async function getSchoolByUserId(userId) {
+  const response = await axios.get(
+    `http://localhost:8000/api/v1/school/${userId}`,
+    {
+      withCredentials: true,
+    }
+  );
+  return response;
+}
 // export async function login(id) {
 //   return await resolve(
 //     axios.get(`http://some-api.com/users/${id}`).then((res) => res.data)

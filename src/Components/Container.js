@@ -7,6 +7,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import { UserContext } from "./UserContext";
 import PrivateRoute from "./PrivateRoute";
+import SchoolView from "./SchoolView";
 
 export default function Content() {
   const [user, setUser] = useState({});
@@ -23,6 +24,7 @@ export default function Content() {
           <PrivateRoute path="/subjects" component={Home} />
           <PrivateRoute path="/groups" component={Home} />
           <PrivateRoute path="/trending" component={Home} />
+          <PrivateRoute path="/school/:schoolId" component={SchoolView} />
           <PrivateRoute path="/:username" component={Profile} />
         </Switch>
       </UserContext.Provider>

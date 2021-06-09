@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import CheckIcon from "@material-ui/icons/Check";
 
 function SummaryBox(props) {
-  const { text, modalHeader, style, img, menuDirection } = props;
+  const {
+    text,
+    modalHeader,
+    style,
+    img,
+    menuDirection,
+    listArray,
+    name,
+    c_school,
+  } = props;
+  const [schoolName, setSchoolName] = useState(c_school);
+  const [isOpen, setIsOpen] = useState(false);
   var menuStyle;
   if (menuDirection === "left") {
     menuStyle = { left: 0 };
   } else {
     menuStyle = { right: 0 };
   }
+  const handleSelect = (schoolName) => {
+    const details = document.querySelectorAll("details");
+    details[0].removeAttribute("open");
+    console.log(details[0]);
+    setSchoolName(schoolName);
+  };
   return (
     <details className="menu noselect">
       <summary
@@ -24,13 +42,52 @@ function SummaryBox(props) {
           ""
         )}
 
-        <span className="css-truncate css-truncate-target ml-1 ">{text}</span>
+        <span className="css-truncate css-truncate-target ml-1 ">
+          {text ? text : schoolName}
+        </span>
         <span className="dropdown-caret"></span>
       </summary>
       <div className="details-menu" style={menuStyle}>
         <div className="select-menu-modal-left border-all border-color-third white">
-          <div className="menu-header full-width border-bottom border-color-primary">
-            {modalHeader}
+          {modalHeader ? (
+            <div className="menu-header full-width border-bottom border-color-primary">
+              {modalHeader}
+            </div>
+          ) : (
+            ""
+          )}
+          <div className="modal-list">
+            {listArray
+              ? listArray.map((item) => (
+                  <label htmlFor={item.id} key={item.id}>
+                    <div className="list-item">
+                      <span className="checked">
+                        <CheckIcon
+                          style={{
+                            position: "absolute",
+                            marginLeft: "4px",
+                            width: "18px",
+                            display:
+                              item.name === schoolName ? "block" : "none",
+                          }}
+                        />
+                      </span>
+                      <input
+                        type="radio"
+                        name={name}
+                        id={item.id}
+                        value={item.id}
+                        defaultChecked={item.name === c_school ? true : false}
+                        onClick={() => handleSelect(item.name)}
+                        style={{ display: "none" }}
+                      />
+
+                      <span className="list-image">{item.name.charAt(0)}</span>
+                      <span>{item.name}</span>
+                    </div>
+                  </label>
+                ))
+              : ""}
           </div>
         </div>
       </div>

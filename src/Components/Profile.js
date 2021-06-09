@@ -10,7 +10,8 @@ import HistoryIcon from "@material-ui/icons/History";
 import SchoolOutlinedIcon from "@material-ui/icons/SchoolOutlined";
 import BookOutlinedIcon from "@material-ui/icons/BookOutlined";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
-import ProfileNavItem from "./ProfileNavItem";
+import NavItems from "./NavItems";
+import { getSchoolByUserId } from "./Api";
 import { Route } from "react-router-dom";
 import ProfileImage from "../images/wl.jpeg";
 import GetUser from "./UserContext";
@@ -25,6 +26,7 @@ export default function Profile(props) {
     c_id = user_data.data[0].id;
   }
   const [user, setUser] = useState({});
+  const [schoolCount, setSchoolCount] = useState("");
   // @TODO add the value of username inside the cookie.....
   const Username = props.match.params.username;
   async function fetchData() {
@@ -33,9 +35,6 @@ export default function Profile(props) {
       setUser(user.data[0]);
     }
   }
-  useEffect(() => {
-    fetchData();
-  }, [Username]); //getting user details by username
   const {
     id,
     name,
@@ -48,6 +47,14 @@ export default function Profile(props) {
     url,
     institute,
   } = user;
+  useEffect(async () => {
+    const schoolCount = await (await getSchoolByUserId(id)).data.length;
+    setSchoolCount(schoolCount);
+  }, [id]); //getting user details by username
+  useEffect(async () => {
+    fetchData();
+  }, [username]); //getting user details by username
+
   const my_profile = username === c_user;
   const [isSticky, setSticky] = useState(false);
   const [isfollowing, setFollow] = useState(false);
@@ -110,23 +117,24 @@ export default function Profile(props) {
               <div className="left"></div>
               <div className="right">
                 <ul className={isSticky ? "head profile-nav" : "profile-nav"}>
-                  <ProfileNavItem
+                  <NavItems
                     Path={`/${username}`}
                     Title="Desk"
                     exact
                     Icon={ImportContactsOutlinedIcon}
                   />
-                  <ProfileNavItem
+                  <NavItems
                     Path={`/${username}/activities`}
                     Title="Activites"
                     Icon={HistoryIcon}
                   />
-                  <ProfileNavItem
+                  <NavItems
                     Path={`/${username}/school`}
                     Title="School"
                     Icon={SchoolOutlinedIcon}
+                    Count={schoolCount}
                   />
-                  <ProfileNavItem
+                  <NavItems
                     Path={`/${username}/notes`}
                     Title="Notes"
                     Icon={BookOutlinedIcon}
@@ -388,6 +396,7 @@ export default function Profile(props) {
                     <School
                       username={username}
                       userId={id}
+                      c_id={c_id}
                       isMyProfile={my_profile}
                       {...props}
                     />

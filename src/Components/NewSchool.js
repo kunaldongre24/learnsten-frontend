@@ -129,7 +129,13 @@ function NewSchool(props) {
         />
         <div className="privacy">
           <div className="flex">
-            <input type="radio" value="0" name="privacy" defaultChecked />
+            <input
+              type="radio"
+              value="0"
+              id="public"
+              name="privacy"
+              defaultChecked
+            />
             <div className="privacy-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +157,7 @@ function NewSchool(props) {
             </div>
           </div>
           <div className="flex">
-            <input type="radio" value="1" name="privacy" />
+            <input type="radio" value="1" id="private" name="privacy" />
             <div className="privacy-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

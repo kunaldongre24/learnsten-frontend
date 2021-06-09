@@ -20,7 +20,16 @@ export async function getUserById(userId) {
 }
 export async function getSchoolByUserId(userId) {
   const response = await axios.get(
-    `http://localhost:8000/api/v1/school/${userId}`,
+    `http://localhost:8000/api/v1/school/user/${userId}`,
+    {
+      withCredentials: true,
+    }
+  );
+  return response;
+}
+export async function getSchoolBySchoolId(schoolId) {
+  const response = await axios.get(
+    `http://localhost:8000/api/v1/school/${schoolId}`,
     {
       withCredentials: true,
     }

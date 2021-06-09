@@ -269,3 +269,7 @@ textarea {
   background: #fff;
   margin-left: 5px;
 }
+.right-container {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}

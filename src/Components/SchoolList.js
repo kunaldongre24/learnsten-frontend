@@ -4,17 +4,18 @@ import SummaryBox from "./SummaryBox";
 import SchoolOutlinedIcon from "@material-ui/icons/SchoolOutlined";
 import { Link } from "react-router-dom";
 import { timeSince } from "./Utils";
+import Loader from "./Loader";
 
 function SchoolList(props) {
   const { isMyProfile, username, userId } = props;
   const [schools, setSchools] = useState([]);
-  const date = new Date("2021-05-31 23:13:14");
+  const [loader, setLoader] = useState(false);
   useEffect(async () => {
+    setLoader(true);
     const schools = await getSchoolByUserId(userId);
-    console.log(schools);
     setSchools(schools.data);
-  }, []);
-
+    setLoader(false);
+  }, [userId]);
   return (
     <div>
       <div className="school-header">
@@ -48,18 +49,43 @@ function SchoolList(props) {
         )}
       </div>
       <div className="school-body">
-        <div className="school-info">
-          <h1>
-            <Link to={`/${username}`}>Kunal Dongre School</Link>
-            <span className="privacy-info">Private</span>
-          </h1>
-          <div className="school-desc">
-            Hi this is the school this is a test thank you
+        {loader ? (
+          <div className="school-info">
+            <Loader style={{ margin: "auto" }} />
           </div>
-          <div className="last-row">
-            <span className="last-update">Updated {timeSince(date)}</span>
-          </div>
-        </div>
+        ) : (
+          schools.map((school) => (
+            <div className="school-info" key={school.id}>
+              <div className="schoolProfile">
+                <div className="profileReplace">
+                  <div className="letter">{school.name.charAt(0)}</div>
+                  <div className="shine"></div>
+                </div>
+              </div>
+              <div className="school-left">
+                <h1>
+                  <Link to={`/school/${school.id}`}>{school.name}</Link>
+                  {school.privacy ? (
+                    <span className="privacy-info">
+                      {school.privacy ? "Private" : ""}
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </h1>
+                <div className="school-desc">{school.description}</div>
+                <div className="last-row">
+                  <span className="last-update">
+                    Updated {timeSince(new Date(school.last_updated))}
+                  </span>
+                </div>
+              </div>
+              <div className="school-right">
+                <button className="join-school">Join</button>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

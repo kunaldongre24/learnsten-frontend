@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SummaryBox from "./SummaryBox";
 import SchoolOutlinedIcon from "@material-ui/icons/SchoolOutlined";
 import { Link } from "react-router-dom";
 import { timeSince } from "./Utils";
 import Loader from "./Loader";
+import { getCoursesBySchoolId } from "./Api";
 
 function CoursesList(props) {
   const { c_id, isMySchool, schoolId } = props;
-  const [schools, setSchools] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [loader, setLoader] = useState(false);
+  useEffect(async () => {
+    const courses = await getCoursesBySchoolId(schoolId);
+    setCourses(courses.data);
+  }, [schoolId]);
   return (
     <div>
       <div className="school-header">
@@ -47,30 +52,29 @@ function CoursesList(props) {
             <Loader style={{ margin: "auto" }} />
           </div>
         ) : (
-          schools.map((school) =>
-            school.ownerId === c_id || !school.privacy ? (
-              <div className="school-info" key={school.id}>
+          courses.map((course) =>
+            course.ownerId === c_id || !course.privacy ? (
+              <div className="school-info" key={course.id}>
                 <div className="school-left">
                   <h1>
-                    <Link to={`/school/${school.id}`}>{school.name}</Link>
-                    {school.privacy ? (
+                    <Link to={`/school/${course.id}`}>{course.name}</Link>
+                    {course.privacy ? (
                       <span className="privacy-info">
-                        {school.privacy ? "Private" : ""}
+                        {course.privacy ? "Private" : ""}
                       </span>
                     ) : (
                       ""
                     )}
                   </h1>
-                  <div className="school-desc">{school.description}</div>
+                  <div className="school-desc">{course.description}</div>
                   <div className="last-row">
+                    <span></span>
                     <span className="last-update">
-                      Updated {timeSince(new Date(school.last_updated))}
+                      Updated {timeSince(new Date(course.last_updated))}
                     </span>
                   </div>
                 </div>
-                <div className="school-right">
-                  <button className="join-school">Join</button>
-                </div>
+                <div className="school-right"></div>
               </div>
             ) : (
               ""

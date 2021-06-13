@@ -6,6 +6,7 @@ import Desk from "./Desk";
 import Activities from "./Activities";
 import Courses from "./Courses";
 import Notes from "./Notes";
+import AboutSchool from "./AboutSchool";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import VideoLibraryOutlinedIcon from "@material-ui/icons/VideoLibraryOutlined";
@@ -67,7 +68,7 @@ export default function SchoolView(props) {
           >
             <div
               style={{
-                maxWidth: "1012px",
+                maxWidth: "1228px",
                 padding: "24px 32px",
                 margin: "auto",
               }}
@@ -82,19 +83,15 @@ export default function SchoolView(props) {
                 <div className="schoolInfo">
                   <div className="school-left">
                     <div className="school-name">{schoolData.name}</div>
-                    <div className="school-desc">{schoolData.description}</div>
-                    <div className="school-owner">
-                      {owner ? owner.username : ""}
-                    </div>
                   </div>
-                  <div className="school-right">
-                    <button
-                      className="join-school blue-btn"
-                      style={{ paddingLeft: "30px", paddingRight: "30px" }}
-                    >
-                      {isMySchool ? "Edit" : "Join"}
-                    </button>
-                  </div>
+                </div>
+                <div className="school-right">
+                  <button
+                    className="join-school blue-btn"
+                    style={{ paddingLeft: "30px", paddingRight: "30px" }}
+                  >
+                    {isMySchool ? "Edit" : "Join"}
+                  </button>
                 </div>
               </div>
             </div>
@@ -104,7 +101,13 @@ export default function SchoolView(props) {
               <div className="expand">
                 <div
                   className="right"
-                  style={{ maxWidth: "1012px", margin: "auto" }}
+                  style={{
+                    maxWidth: "1228px",
+                    width: "100%",
+                    paddingLeft: "30px",
+                    paddingRight: "30px",
+                    margin: "auto",
+                  }}
                 >
                   <ul className={isSticky ? "head profile-nav" : "profile-nav"}>
                     <NavItems
@@ -133,36 +136,36 @@ export default function SchoolView(props) {
               </div>
             </div>
           </div>
-          <div className="profile-body cn" style={{ maxWidth: "1012px" }}>
+          <div className="profile-body cn" style={{ maxWidth: "1228px" }}>
             <div className="expand">
-              <div style={{ width: "100%" }}>
-                <div className="right-container">
-                  <Switch>
-                    <Route
-                      path={`/school/${schoolId}`}
-                      exact
-                      component={Desk}
-                    />
-                    <Route
-                      path={`/school/${schoolId}/videos`}
-                      component={Activities}
-                    />
-                    <Route
-                      path={`/school/${schoolId}/courses`}
-                      render={() => (
-                        <Courses
-                          schoolId={schoolId}
-                          c_school={schoolData.name}
-                          c_id={c_id}
-                          headRef={ref}
-                          isMySchool={isMySchool}
-                          {...props}
-                        />
-                      )}
-                    />
-                    <Route path={`/school/${schoolId}`} component={Notes} />
-                  </Switch>
-                </div>
+              <div className="left-container as">
+                <Switch>
+                  <Route path={`/school/${schoolId}`} exact component={Desk} />
+                  <Route
+                    path={`/school/${schoolId}/videos`}
+                    component={Activities}
+                  />
+                  <Route
+                    path={`/school/${schoolId}/courses`}
+                    render={() => (
+                      <Courses
+                        schoolId={schoolId}
+                        c_school={schoolData.name}
+                        c_id={c_id}
+                        headRef={ref}
+                        isMySchool={isMySchool}
+                        {...props}
+                      />
+                    )}
+                  />
+                  <Route path={`/school/${schoolId}`} component={Notes} />
+                </Switch>
+              </div>
+              <div className="right-container as">
+                <AboutSchool
+                  description={schoolData.description}
+                  schoolId={schoolId}
+                />
               </div>
             </div>
           </div>

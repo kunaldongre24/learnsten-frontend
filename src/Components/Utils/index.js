@@ -49,3 +49,17 @@ export function timeSince(date) {
   }
   return Math.floor(seconds) + " seconds ago";
 }
+export function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
+export function sortByCount(array) {
+  var map = array.reduce(function (p, c) {
+    p[c] = (p[c] || 0) + 1;
+    return p;
+  }, {});
+
+  var newTypesArray = Object.keys(map).sort(function (a, b) {
+    return map[b] - map[a];
+  });
+  return newTypesArray;
+}

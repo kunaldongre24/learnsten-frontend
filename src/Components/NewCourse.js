@@ -31,12 +31,12 @@ function NewCourse(props) {
     executeScroll();
   }, []);
   const addSubjects = () => {
-    const string = document.getElementById("subjects").value.toLowerCase();
+    const string = document.getElementById("subjects").value;
     const subject = string.replace(/\s+/g, " ").trim();
 
     var bool = false;
     subjects.map((data) => {
-      if (data === subject) {
+      if (data.toLowerCase() === subject.toLowerCase()) {
         bool = true;
       }
     });
@@ -45,7 +45,7 @@ function NewCourse(props) {
       setSubjects((oldArray) => [...oldArray, subject]);
       document.getElementById("subjects").value = "";
     } else if (bool) {
-      setSubjectError("this subject already is already in the list");
+      setSubjectError("this subject is already in the list");
     }
   };
   const removeSubject = (data) => {
@@ -54,33 +54,43 @@ function NewCourse(props) {
   const removeSubjectError = () => {
     setSubjectError("");
   };
-  const createNewSchool = async (e) => {
-    setLoader(true);
-    e.preventDefault();
-    const request = {
-      name: document.getElementById("schoolName").value,
-      description: document.getElementById("description").value,
-      privacy: document.querySelector('input[name="privacy"]:checked').value,
-    };
-    const result = await axios.post(
-      "http://localhost:8000/api/v1/school/",
-      request,
-      { withCredentials: true }
-    );
-    const { message, err } = result.data;
-    if (err) setError(err);
-    if (message) {
-      if (message === "success") {
-        return props.history.push(`/${username}/school/`);
-      }
-    }
-    setLoader(false);
-  };
 
   const handleKeypress = (e) => {
     //it triggers by pressing the enter key
     if (e.charCode === 13) {
       addSubjects();
+    }
+  };
+
+  const createNewCourse = async (e) => {
+    e.preventDefault();
+    if (!document.getElementById("courseName").value.trim()) {
+      setError("Course name cannot be empty.");
+    } else if (!subjects.length) {
+      setError("Add atleast one subject.");
+    } else {
+      setError("");
+      setLoader(true);
+      e.preventDefault();
+      const request = {
+        name: document.getElementById("courseName").value,
+        description: document.getElementById("description").value,
+        schoolId: document.querySelector('input[name="school"]:checked').value,
+        subjects: subjects,
+      };
+      const result = await axios.post(
+        "http://localhost:8000/api/v1/course/",
+        request,
+        { withCredentials: true }
+      );
+      const { message, err, schoolId } = result.data;
+      if (err) setError(err);
+      if (message) {
+        if (message === "success") {
+          console.log(schoolId);
+        }
+      }
+      setLoader(false);
     }
   };
   return (
@@ -90,7 +100,10 @@ function NewCourse(props) {
         A course contains of all the videos, notes. You can create multiple
         courses for different subjects and add references and notes to them.
       </div>
-      <div className={`error box ${Error ? `` : `hidden`}`}>
+      <div
+        className={`error box ${Error ? `` : `hidden`}`}
+        style={{ padding: "10px", marginBottom: "10px" }}
+      >
         <div className="err-text">
           {Error}
           <button className="close" onClick={() => setError(false)}>
@@ -107,14 +120,7 @@ function NewCourse(props) {
           </button>
         </div>
       </div>
-      <form
-        className="create-school-form"
-        autoComplete="off"
-        onSubmit={(e) => {
-          createNewSchool(e);
-        }}
-        method="post"
-      >
+      <form className="create-school-form" autoComplete="off" method="post">
         <div className="row">
           <span>
             <label htmlFor="owner">
@@ -122,7 +128,6 @@ function NewCourse(props) {
             </label>
             <SummaryBox
               text={username}
-              img={ProfileImage}
               menuDirection={"left"}
               listArray={schools}
               name="school"
@@ -144,10 +149,8 @@ function NewCourse(props) {
               className={`username light-blue  ${
                 nameValid.name && !nameValid.valid ? `errfocus` : ``
               }`}
-              required
-              id="schoolName"
-              onChange={validateName}
-              name="schoolName"
+              id="courseName"
+              name="courseName"
             />
             {nameValid.name ? (
               <span
@@ -174,7 +177,7 @@ function NewCourse(props) {
         />
         <label htmlFor="subjects">Subjects</label>
 
-        <div className="subject-selector">
+        <div className="subject-selector" id="subject-selector">
           <ul
             className="subject-list"
             style={
@@ -216,7 +219,12 @@ function NewCourse(props) {
               onChange={removeSubjectError}
               onKeyPress={handleKeypress}
               placeholder="Enter subjects here..."
-              style={{ border: "none", margin: "0" }}
+              style={{
+                border: "none",
+                margin: "0",
+                borderTopRightRadius: "0",
+                borderBottomRightRadius: "0",
+              }}
             />
             <button
               onClick={addSubjects}
@@ -245,7 +253,7 @@ function NewCourse(props) {
         )}
         <input
           type="button"
-          required
+          onClick={createNewCourse}
           name={`Register`}
           value={Loader ? `Creating New School...` : `Create New School`}
           className={`register ${Loader ? `loadingBtn` : ``}`}

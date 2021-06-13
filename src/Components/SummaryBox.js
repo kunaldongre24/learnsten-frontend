@@ -23,7 +23,6 @@ function SummaryBox(props) {
   const handleSelect = (schoolName) => {
     const details = document.querySelectorAll("details");
     details[0].removeAttribute("open");
-    console.log(details[0]);
     setSchoolName(schoolName);
   };
   return (
@@ -38,6 +37,13 @@ function SummaryBox(props) {
       >
         {img ? (
           <img src={img} height="20px" width="20px" className="summary-image" />
+        ) : schoolName ? (
+          <span
+            className="list-image"
+            style={{ float: "left", marginLeft: "0", lineHeight: 1.5 }}
+          >
+            {schoolName.charAt(0)}
+          </span>
         ) : (
           ""
         )}

@@ -269,7 +269,13 @@ textarea {
   background: #fff;
   margin-left: 5px;
 }
-.right-container {
+.profile-body .expand > div {
   padding-top: 16px;
   padding-bottom: 16px;
+}
+.left-container.as {
+  width: 75%;
+}
+.right-container.as {
+  width: 25%;
 }

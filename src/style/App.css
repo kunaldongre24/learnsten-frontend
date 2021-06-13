@@ -274,12 +274,11 @@ textarea::placeholder {
   opacity: 1; /* Firefox */
 }
 ul.subject-list li {
-  padding-right: 10px;
-  padding-left: 10px;
+  padding: 2px 10px;
   font-size: 12px;
   list-style: none;
   display: inline-flex;
-  background: #8c53b9;
+  background: #6e3997;
   margin: 0px 6px 6px 0px;
   color: #fff;
   border-radius: 20px;

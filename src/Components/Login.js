@@ -70,7 +70,7 @@ function Login() {
             </div>
             <div>
               <label htmlFor="password">Password</label>
-              <a>Forgot Password?</a>
+              <a href="forgot password">Forgot Password?</a>
               <input
                 type="password"
                 className="password light-blue"

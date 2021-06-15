@@ -1,11 +1,12 @@
 import { Route, Redirect } from "react-router";
 
 export default function PrivateRoute({ component: Component, ...rest }) {
+  const bool = true;
   return (
     <Route
       {...rest}
       render={(props) =>
-        true === true ? (
+        bool === true ? (
           <Component {...props} />
         ) : (
           <Redirect

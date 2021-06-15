@@ -24,7 +24,7 @@ const GetUser = () => {
     } catch {
       console.log("there is some error");
     }
-  }, [UserContext]);
+  }, [setUser]);
 
   return user;
 };

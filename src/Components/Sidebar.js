@@ -11,11 +11,10 @@ import "../style/sidebar.css";
 import GetUser from "./UserContext";
 
 export default function Navigation() {
-  var c_user, c_id;
+  var c_user;
   const user_data = GetUser();
   if (user_data.data) {
     c_user = user_data.data[0].username;
-    c_id = user_data.data[0].id;
   }
 
   const [isSticky, setSticky] = useState(false);

@@ -26,14 +26,10 @@ export function isEmpty(obj) {
 export function timeSince(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
 
-  var interval = seconds / 31536000;
-
+  var interval;
+  interval = seconds / 259200;
   if (interval > 1) {
-    return Math.floor(interval) + " years ago";
-  }
-  interval = seconds / 2592000;
-  if (interval > 1) {
-    return Math.floor(interval) + " months ago";
+    return "on " + dateFormat(date);
   }
   interval = seconds / 86400;
   if (interval > 1) {
@@ -62,4 +58,8 @@ export function sortByCount(array) {
     return map[b] - map[a];
   });
   return newTypesArray;
+}
+export function dateFormat(date) {
+  const DATE_OPTIONS = { day: "numeric", month: "short", year: "numeric" };
+  return date.toLocaleDateString("en-IN", DATE_OPTIONS);
 }

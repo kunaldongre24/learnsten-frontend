@@ -10,10 +10,16 @@ function CoursesList(props) {
   const { c_id, isMySchool, schoolId } = props;
   const [courses, setCourses] = useState([]);
   const [loader, setLoader] = useState(false);
-  useEffect(async () => {
-    const courses = await getCoursesBySchoolId(schoolId);
-    setCourses(courses.data);
+  useEffect(() => {
+    const getSchoolData = async () => {
+      setLoader(true);
+      const courses = await getCoursesBySchoolId(schoolId);
+      setCourses(courses.data);
+      setLoader(false);
+    };
+    getSchoolData();
   }, [schoolId]);
+
   return (
     <div>
       <div className="school-header">
@@ -57,7 +63,7 @@ function CoursesList(props) {
               <div className="school-info" key={course.id}>
                 <div className="school-left">
                   <h1>
-                    <Link to={`/school/${course.id}`}>{course.name}</Link>
+                    <Link to={`/course/${course.id}`}>{course.name}</Link>
                     {course.privacy ? (
                       <span className="privacy-info">
                         {course.privacy ? "Private" : ""}

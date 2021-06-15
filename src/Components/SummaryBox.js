@@ -13,7 +13,6 @@ function SummaryBox(props) {
     c_school,
   } = props;
   const [schoolName, setSchoolName] = useState(c_school);
-  const [isOpen, setIsOpen] = useState(false);
   var menuStyle;
   if (menuDirection === "left") {
     menuStyle = { left: 0 };
@@ -36,7 +35,13 @@ function SummaryBox(props) {
         role="button"
       >
         {img ? (
-          <img src={img} height="20px" width="20px" className="summary-image" />
+          <img
+            src={img}
+            height="20px"
+            width="20px"
+            className="summary-image"
+            alt=""
+          />
         ) : schoolName ? (
           <span
             className="list-image"

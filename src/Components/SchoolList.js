@@ -10,11 +10,14 @@ function SchoolList(props) {
   const { isMyProfile, username, userId } = props;
   const [schools, setSchools] = useState([]);
   const [loader, setLoader] = useState(false);
-  useEffect(async () => {
-    setLoader(true);
-    const schools = await getSchoolByUserId(userId);
-    setSchools(schools.data);
-    setLoader(false);
+  useEffect(() => {
+    const getSchoolByUser = async () => {
+      setLoader(true);
+      const schools = await getSchoolByUserId(userId);
+      setSchools(schools.data);
+      setLoader(false);
+    };
+    getSchoolByUser();
   }, [userId]);
   return (
     <div>

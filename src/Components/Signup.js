@@ -25,7 +25,7 @@ function Signup() {
       request,
       { withCredentials: true }
     );
-    const { message, err } = result.data;
+    const { err } = result.data;
     if (err) setError(err);
 
     setLoader(false);
@@ -176,9 +176,10 @@ function Signup() {
           ""
         )}
         <div className="terms">
-          By clicking Sign Up, you agree to our <a>Terms</a>, <a>Data Policy</a>{" "}
-          and <a>Cookie Policy</a>. You may receive SMS notifications from us
-          and can opt out at any time.
+          By clicking Sign Up, you agree to our <a href="/terms">Terms</a>,{" "}
+          <a href="/data-policy">Data Policy</a> and{" "}
+          <a href="/cookie-policy">Cookie Policy</a>. You may receive SMS
+          notifications from us and can opt out at any time.
         </div>
         <input
           type="submit"

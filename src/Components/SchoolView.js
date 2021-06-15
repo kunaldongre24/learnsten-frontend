@@ -10,35 +10,42 @@ import AboutSchool from "./AboutSchool";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import VideoLibraryOutlinedIcon from "@material-ui/icons/VideoLibraryOutlined";
-import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 import BookOutlinedIcon from "@material-ui/icons/BookOutlined";
 import NavItems from "./NavItems";
 import { Route, Switch } from "react-router-dom";
 import GetUser from "./UserContext";
-import { getSchoolBySchoolId, getUserById, getUserByUsername } from "./Api";
+import { getSchoolBySchoolId, getUserById } from "./Api";
+import Loader from "./Loader";
 
 export default function SchoolView(props) {
   const [schoolData, setSchoolData] = useState({});
+  const [loading, setLoading] = useState(false);
   const schoolId = props.match.params.schoolId;
-  useEffect(async () => {
-    const schoolData = await getSchoolBySchoolId(schoolId);
-    setSchoolData(schoolData.data[0]);
-  }, []);
-  var c_user, c_id;
+  useEffect(() => {
+    const getSchoolById = async () => {
+      setLoading(true);
+      const schoolData = await getSchoolBySchoolId(schoolId);
+      setSchoolData(schoolData.data[0]);
+      setLoading(false);
+    };
+    getSchoolById();
+  }, [schoolId]);
+  var c_id;
   const user_data = GetUser();
   if (user_data.data) {
-    c_user = user_data.data[0].username;
     c_id = user_data.data[0].id;
   }
   const [owner, setOwner] = useState({});
-  const [user, setUser] = useState({});
-  useEffect(async () => {
-    const owner = await getUserById(schoolData.ownerId);
-    setOwner(owner.data[0]);
+  useEffect(() => {
+    const getUserData = async () => {
+      setLoading(true);
+      const owner = await getUserById(schoolData.ownerId);
+      setOwner(owner.data[0]);
+      setLoading(false);
+    };
+    getUserData();
   }, [schoolData.ownerId]);
   //getting user details by username
-  const { id, username } = user;
-  const my_profile = username === c_user;
   const [isSticky, setSticky] = useState(false);
   const ref = useRef(null);
   const handleScroll = () => {
@@ -54,6 +61,7 @@ export default function SchoolView(props) {
       window.removeEventListener("scroll", () => handleScroll);
     };
   }, []);
+
   const isMySchool = c_id === schoolData.ownerId;
 
   return (
@@ -137,37 +145,42 @@ export default function SchoolView(props) {
             </div>
           </div>
           <div className="profile-body cn" style={{ maxWidth: "1228px" }}>
-            <div className="expand">
-              <div className="left-container as">
-                <Switch>
-                  <Route path={`/school/${schoolId}`} exact component={Desk} />
-                  <Route
-                    path={`/school/${schoolId}/videos`}
-                    component={Activities}
-                  />
-                  <Route
-                    path={`/school/${schoolId}/courses`}
-                    render={() => (
-                      <Courses
-                        schoolId={schoolId}
-                        c_school={schoolData.name}
-                        c_id={c_id}
-                        headRef={ref}
-                        isMySchool={isMySchool}
-                        {...props}
-                      />
-                    )}
-                  />
-                  <Route path={`/school/${schoolId}`} component={Notes} />
-                </Switch>
+            {loading ? (
+              <Loader />
+            ) : (
+              <div className="expand">
+                <div className="left-container as">
+                  <Switch>
+                    <Route
+                      path={`/school/${schoolId}`}
+                      exact
+                      component={Desk}
+                    />
+                    <Route
+                      path={`/school/${schoolId}/videos`}
+                      component={Activities}
+                    />
+                    <Route
+                      path={`/school/${schoolId}/courses`}
+                      render={() => (
+                        <Courses
+                          schoolId={schoolId}
+                          c_school={schoolData.name}
+                          c_id={c_id}
+                          headRef={ref}
+                          isMySchool={isMySchool}
+                          {...props}
+                        />
+                      )}
+                    />
+                    <Route path={`/school/${schoolId}`} component={Notes} />
+                  </Switch>
+                </div>
+                <div className="right-container as">
+                  <AboutSchool schoolData={schoolData} owner={owner} />
+                </div>
               </div>
-              <div className="right-container as">
-                <AboutSchool
-                  description={schoolData.description}
-                  schoolId={schoolId}
-                />
-              </div>
-            </div>
+            )}
           </div>
         </div>
       ) : (

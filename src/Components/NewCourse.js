@@ -1,35 +1,29 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../style/NewSchool.css";
-import ProfileImage from "../images/wl.jpeg";
 import ClearIcon from "@material-ui/icons/Clear";
 import SummaryBox from "./SummaryBox";
 import { getSchoolByUserId } from "./Api";
 
 function NewCourse(props) {
   const { username, executeScroll, c_id, c_school } = props;
-  const [nameValid, setNameValid] = useState({});
   const [Error, setError] = useState(false);
   const [subjectError, setSubjectError] = useState("");
   const [subjects, setSubjects] = useState([]);
   const [schools, setSchools] = useState([]);
   const [Loader, setLoader] = useState(false);
-  const validateName = async (e) => {
-    const request = { name: e.target.value };
-    const result = await axios.post(
-      "http://localhost:8000/api/v1/auth/validatename",
-      request,
-      { withCredentials: true }
-    );
-    setNameValid(result.data);
-  };
-  useEffect(async () => {
-    const schools = await getSchoolByUserId(c_id);
-    setSchools(schools.data);
+
+  useEffect(() => {
+    const getSchoolByUser = async () => {
+      const schools = await getSchoolByUserId(c_id);
+      setSchools(schools.data);
+    };
+    getSchoolByUser();
   }, [c_id]);
+
   useEffect(() => {
     executeScroll();
-  }, []);
+  }, [executeScroll]);
   const addSubjects = () => {
     const string = document.getElementById("subjects").value;
     const subject = string.replace(/\s+/g, " ").trim();
@@ -39,6 +33,7 @@ function NewCourse(props) {
       if (data.toLowerCase() === subject.toLowerCase()) {
         bool = true;
       }
+      return bool;
     });
 
     if (subject.trim().length > 0 && !bool) {
@@ -146,26 +141,10 @@ function NewCourse(props) {
             </label>
             <input
               type="text"
-              className={`username light-blue  ${
-                nameValid.name && !nameValid.valid ? `errfocus` : ``
-              }`}
+              className={`username light-blue`}
               id="courseName"
               name="courseName"
             />
-            {nameValid.name ? (
-              <span
-                className={`messageBox ${
-                  nameValid.name && !nameValid.valid
-                    ? `inputerror`
-                    : `inputmessage`
-                }`}
-              >
-                <span className="arrow"></span>
-                {nameValid.message}
-              </span>
-            ) : (
-              ""
-            )}
           </span>
         </div>
         <label htmlFor="Description">Description</label>

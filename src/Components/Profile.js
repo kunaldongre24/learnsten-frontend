@@ -35,25 +35,25 @@ export default function Profile(props) {
       setUser(user.data[0]);
     }
   }
-  const {
-    id,
-    name,
-    username,
-    email,
-    bio,
-    location,
-    profile_image_url,
-    twitter,
-    url,
-    institute,
-  } = user;
-  useEffect(async () => {
-    const schoolCount = await (await getSchoolByUserId(id)).data.length;
-    setSchoolCount(schoolCount);
+  const { id, name, username, email, bio, location, twitter, url, institute } =
+    user;
+  useEffect(() => {
+    const getSchoolData = async () => {
+      const schoolCount = await (await getSchoolByUserId(id)).data.length;
+      setSchoolCount(schoolCount);
+    };
+    getSchoolData();
   }, [id]); //getting user details by username
-  useEffect(async () => {
+
+  useEffect(() => {
+    async function fetchData() {
+      const user = await getUserByUsername(Username);
+      if (user.data.length > 0) {
+        setUser(user.data[0]);
+      }
+    }
     fetchData();
-  }, [username]); //getting user details by username
+  }, [Username]); //getting user details by username
 
   const my_profile = username === c_user;
   const [isSticky, setSticky] = useState(false);
@@ -90,13 +90,9 @@ export default function Profile(props) {
       twitter: e.target[5].value,
     };
     e.preventDefault();
-    const response = await axios.put(
-      `http://localhost:8000/api/v1/user/${c_id}`,
-      submitData,
-      {
-        withCredentials: true,
-      }
-    );
+    await axios.put(`http://localhost:8000/api/v1/user/${c_id}`, submitData, {
+      withCredentials: true,
+    });
     fetchData();
     cancelEdit();
   };
@@ -154,6 +150,7 @@ export default function Profile(props) {
                     width="260"
                     height="260"
                     src={ProfileImage}
+                    alt="profile"
                   />
                 </div>
               </div>

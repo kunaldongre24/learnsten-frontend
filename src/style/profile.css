@@ -137,7 +137,7 @@ ul.profile-nav .selected li svg {
 .follow-button {
   height: 35px;
   width: 100%;
-  border: 1px solid var(--color-scale-gray3);
+  border: none;
   border-radius: 6px;
   font-size: 14px;
   margin-bottom: 16px;

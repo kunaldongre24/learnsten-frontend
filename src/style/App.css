@@ -266,7 +266,8 @@ details.menu[open] > summary::before {
   padding-right: 10px;
   white-space: nowrap;
 }
-
+.view-container {
+}
 input::placeholder,
 textarea::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */

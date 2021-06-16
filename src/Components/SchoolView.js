@@ -3,7 +3,7 @@ import "../style/SchoolView.css";
 import "../style/NoSidebar.css";
 import "../style/profile.css";
 import Desk from "./Desk";
-import Activities from "./Activities";
+import Videos from "./Videos";
 import Courses from "./Courses";
 import Notes from "./Notes";
 import AboutSchool from "./AboutSchool";
@@ -96,7 +96,12 @@ export default function SchoolView(props) {
                 <div className="school-right">
                   <button
                     className="join-school blue-btn"
-                    style={{ paddingLeft: "30px", paddingRight: "30px" }}
+                    style={{
+                      paddingLeft: "30px",
+                      paddingRight: "30px",
+                      border: "none",
+                      display: "flex",
+                    }}
                   >
                     {isMySchool ? "Edit" : "Join"}
                   </button>
@@ -158,7 +163,17 @@ export default function SchoolView(props) {
                     />
                     <Route
                       path={`/school/${schoolId}/videos`}
-                      component={Activities}
+                      render={() => (
+                        <Videos
+                          schoolId={schoolId}
+                          c_school={schoolData.name}
+                          c_id={c_id}
+                          headRef={ref}
+                          isMySchool={isMySchool}
+                          owner={owner}
+                          {...props}
+                        />
+                      )}
                     />
                     <Route
                       path={`/school/${schoolId}/courses`}
@@ -169,11 +184,25 @@ export default function SchoolView(props) {
                           c_id={c_id}
                           headRef={ref}
                           isMySchool={isMySchool}
+                          owner={owner}
                           {...props}
                         />
                       )}
                     />
-                    <Route path={`/school/${schoolId}`} component={Notes} />
+                    <Route
+                      path={`/school/${schoolId}`}
+                      render={() => (
+                        <Notes
+                          schoolId={schoolId}
+                          c_school={schoolData.name}
+                          c_id={c_id}
+                          headRef={ref}
+                          isMySchool={isMySchool}
+                          owner={owner}
+                          {...props}
+                        />
+                      )}
+                    />
                   </Switch>
                 </div>
                 <div className="right-container as">

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SummaryBox from "./SummaryBox";
-import SchoolOutlinedIcon from "@material-ui/icons/SchoolOutlined";
 import { Link } from "react-router-dom";
 import { timeSince } from "./Utils";
+import VideoLibraryOutlinedIcon from "@material-ui/icons/VideoLibraryOutlined";
 import Loader from "./Loader";
 import { getCoursesBySchoolId } from "./Api";
 
@@ -16,10 +16,10 @@ function CoursesList(props) {
       const courses = await getCoursesBySchoolId(schoolId);
       setCourses(courses.data);
       setLoader(false);
+      return () => setCourses([]);
     };
     getSchoolData();
   }, [schoolId]);
-
   return (
     <div>
       <div className="school-header">
@@ -45,7 +45,7 @@ function CoursesList(props) {
         />
         {isMySchool ? (
           <Link className="new-school" to={`/school/${schoolId}/courses/new`}>
-            <SchoolOutlinedIcon />
+            <VideoLibraryOutlinedIcon />
             New
           </Link>
         ) : (
@@ -57,7 +57,7 @@ function CoursesList(props) {
           <div className="school-info">
             <Loader style={{ margin: "auto" }} />
           </div>
-        ) : (
+        ) : courses.length ? (
           courses.map((course) =>
             course.ownerId === c_id || !course.privacy ? (
               <div className="school-info" key={course.id}>
@@ -86,6 +86,25 @@ function CoursesList(props) {
               ""
             )
           )
+        ) : (
+          <div className="no-courses">
+            <div className="no-course-logo no-logo"></div>
+            <h2>This school don't have any course yet.</h2>
+            <div className="newBtn">
+              {isMySchool ? (
+                <Link
+                  className="new-school"
+                  to={`/school/${schoolId}/courses/new`}
+                >
+                  <VideoLibraryOutlinedIcon />
+                  New Course
+                </Link>
+              ) : (
+                ""
+              )}
+              <a href="/learn-more">Learn more</a>
+            </div>
+          </div>
         )}
       </div>
     </div>

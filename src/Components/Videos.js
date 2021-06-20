@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import BookOutlined from "@material-ui/icons/BookOutlined";
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import SummaryBox from "./SummaryBox";
 
-export default function Notes(props) {
+export default function Videos(props) {
   const { isMySchool, schoolId } = props;
+
   return (
     <div>
       <div className="school-header">
@@ -30,7 +31,7 @@ export default function Notes(props) {
         />
         {isMySchool ? (
           <Link className="new-school" to={`/school/${schoolId}/courses/new`}>
-            <BookOutlined />
+            <PlayCircleOutlineIcon />
             New
           </Link>
         ) : (
@@ -38,12 +39,12 @@ export default function Notes(props) {
         )}
       </div>
       <div className="no-courses">
-        <div className="no-note-logo no-logo"></div>
+        <div className="no-video-logo no-logo"></div>
         <h2>This school don't have any course yet.</h2>
         <div className="newBtn">
           <Link className="new-school" to={`notes/new`}>
-            <BookOutlined />
-            New Note
+            <PlayCircleOutlineIcon />
+            New Video
           </Link>
 
           <a href="/learn-more">Learn more</a>

@@ -382,7 +382,19 @@ export default function Profile(props) {
             </div>
             <div className="right">
               <div className="right-container">
-                <Route path={`/${username}`} exact component={Desk} />
+                <Route
+                  path={`/${username}`}
+                  exact
+                  render={() => (
+                    <Desk
+                      username={username}
+                      userId={id}
+                      c_id={c_id}
+                      isMyProfile={my_profile}
+                      {...props}
+                    />
+                  )}
+                />
                 <Route
                   path={`/${username}/activities`}
                   component={Activities}

@@ -5,6 +5,7 @@ import SchoolOutlinedIcon from "@material-ui/icons/SchoolOutlined";
 import { Link } from "react-router-dom";
 import { timeSince } from "./Utils";
 import Loader from "./Loader";
+import Bullet from "./Bullet";
 
 function SchoolList(props) {
   const { isMyProfile, username, userId } = props;
@@ -15,10 +16,12 @@ function SchoolList(props) {
       setLoader(true);
       const schools = await getSchoolByUserId(userId);
       setSchools(schools.data);
+
       setLoader(false);
     };
     getSchoolByUser();
   }, [userId]);
+
   return (
     <div>
       <div className="school-header">
@@ -58,7 +61,7 @@ function SchoolList(props) {
           </div>
         ) : (
           schools.map((school) => (
-            <div className="school-info" key={school.id}>
+            <div className="school-info detailed" key={school.id}>
               <div className="schoolProfile">
                 <div className="profileReplace">
                   <div className="letter">{school.name.charAt(0)}</div>
@@ -66,22 +69,26 @@ function SchoolList(props) {
                 </div>
               </div>
               <div className="school-left">
-                <h1>
+                <h1 className="school-name">
                   <Link to={`/school/${school.id}`}>{school.name}</Link>
-                  {school.privacy ? (
-                    <span className="privacy-info">
-                      {school.privacy ? "Private" : ""}
-                    </span>
-                  ) : (
-                    ""
-                  )}
                 </h1>
-                <div className="school-desc">{school.description}</div>
+                <div className="school-desc" style={{ display: "block" }}>
+                  {school.description}
+                </div>
                 <div className="last-row">
-                  <span className="last-update">
-                    Updated {timeSince(new Date(school.last_updated))}
+                  <span className="courseCount">
+                    <Bullet color="#4ba55d" />
+                    {school.courseCount}
+                    <span className="alt-text">
+                      {school.courseCount === 1 ? "Course" : "Courses"}
+                    </span>
+                    <Bullet color="#747F8D" />0
+                    <span className="alt-text"> Members </span>
                   </span>
                 </div>
+                <span className="last-update">
+                  Updated {timeSince(new Date(school.last_updated))}
+                </span>
               </div>
               <div className="school-right">
                 <button className="join-school">Join</button>

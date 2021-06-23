@@ -92,7 +92,7 @@ input.register {
 }
 .valid-check {
   float: right;
-  transform: translate(-10px, -50px);
+  transform: translate(-10px, -70px);
 }
 .messageBox {
   width: max-content;

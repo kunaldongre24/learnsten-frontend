@@ -3,10 +3,8 @@ import "../style/Login.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "./UserContext";
-import { useHistory } from "react-router-dom";
 
-function Login() {
-  const history = useHistory();
+function Login(props) {
   const { setUser } = useContext(UserContext);
 
   const [Loader, setLoader] = useState(false);
@@ -26,7 +24,7 @@ function Login() {
     const { login, user, err } = result.data;
     if (login) {
       setUser(user);
-      history.push("/");
+      props.history.push("/");
     } else if (err) setError(err);
     setLoader(false);
   };
@@ -59,7 +57,7 @@ function Login() {
             method="post"
           >
             <div>
-              <label htmlFor="password">Username or password</label>
+              <label htmlFor="login">Username or email</label>
               <input
                 type="text"
                 className="username light-blue"

@@ -42,6 +42,18 @@ export async function getSubjectById(subjectId) {
   );
   return response;
 }
+export async function countCourseBySchoolId(subjectId) {
+  const response = await axios.get(
+    `http://localhost:8000/api/v1/course/courseCount/${subjectId}`
+  );
+  return response;
+}
+export async function suggestSubject(subject) {
+  const response = await axios.get(
+    `http://localhost:8000/api/v1/subject/suggestions/${subject}`
+  );
+  return response;
+}
 // export async function login(id) {
 //   return await resolve(
 //     axios.get(`http://some-api.com/users/${id}`).then((res) => res.data)

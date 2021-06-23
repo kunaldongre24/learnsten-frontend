@@ -52,7 +52,7 @@ function CoursesList(props) {
           ""
         )}
       </div>
-      <div className="school-body">
+      <div className="course-body">
         {loader ? (
           <div className="school-info">
             <Loader style={{ margin: "auto" }} />

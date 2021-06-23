@@ -1,12 +1,16 @@
+import Cookies from "js-cookie";
 import { Route, Redirect } from "react-router";
 
-export default function PrivateRoute({ component: Component, ...rest }) {
-  const bool = true;
+export default function ProtectedRoute({ component: Component, ...rest }) {
+  var isAuth = false;
+  if (Cookies.get("c_id")) {
+    isAuth = true;
+  }
   return (
     <Route
       {...rest}
       render={(props) =>
-        bool === true ? (
+        isAuth ? (
           <Component {...props} />
         ) : (
           <Redirect

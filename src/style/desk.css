@@ -1,26 +1,10 @@
-ol.courses {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin-left: -8px;
-  margin-right: -8px;
-}
-ol.courses li {
-  width: 50%;
-  height: 100px;
-  padding-left: 8px;
-  padding-right: 8px;
-  margin-bottom: 16px;
-}
-.showCard {
-  width: 100%;
-  height: 100%;
-  border: 1px solid #e6d8d8;
-  display: block;
-  border-radius: 6px;
-}
 .heading {
   font-weight: 400 !important;
   font-size: 16px;
   margin-bottom: 12px;
+}
+.desk-body {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }

@@ -1,30 +1,25 @@
 import { useContext, useEffect, createContext } from "react";
 import { getUserById } from "./Api";
-import axios from "axios";
+import Cookies from "js-cookie";
 
 export const UserContext = createContext({});
 
 const GetUser = () => {
+  const c_id = Cookies.get("c_id");
   const { user, setUser } = useContext(UserContext);
   useEffect(() => {
     try {
       async function fetchUser() {
-        const response = await axios.get(
-          "http://localhost:8000/api/v1/auth/login",
-          {
-            withCredentials: true,
-          }
-        );
-        if (response.data.loggedIn) {
-          const result = await getUserById(response.data.user);
+        if (c_id) {
+          const result = await getUserById(c_id);
           setUser(result);
         }
       }
       fetchUser();
-    } catch {
-      console.log("there is some error");
+    } catch (err) {
+      console.log(err);
     }
-  }, [setUser]);
+  }, [setUser, c_id]);
 
   return user;
 };

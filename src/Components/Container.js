@@ -2,11 +2,12 @@ import React, { useState, useMemo } from "react";
 import Home from "./Home";
 import Profile from "./Profile";
 import Header from "./Header";
-import { Route, Switch } from "react-router";
+import UserRedirect from "./UserRedirect";
+import { Switch } from "react-router";
 import Login from "./Login";
 import Signup from "./Signup";
 import { UserContext } from "./UserContext";
-import PrivateRoute from "./PrivateRoute";
+import ProtectedRoute from "./ProtectedRoute";
 import SchoolView from "./SchoolView";
 
 export default function Content() {
@@ -17,15 +18,15 @@ export default function Content() {
       <UserContext.Provider value={providerValue}>
         <Header />
         <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <PrivateRoute exact path="/" component={Home} />
-          <PrivateRoute path="/explore" component={Home} />
-          <PrivateRoute path="/subjects" component={Home} />
-          <PrivateRoute path="/groups" component={Home} />
-          <PrivateRoute path="/trending" component={Home} />
-          <PrivateRoute path="/school/:schoolId" component={SchoolView} />
-          <PrivateRoute path="/:username" component={Profile} />
+          <UserRedirect path="/login" component={Login} />
+          <UserRedirect path="/signup" component={Signup} />
+          <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute path="/explore" component={Home} />
+          <ProtectedRoute path="/subjects" component={Home} />
+          <ProtectedRoute path="/groups" component={Home} />
+          <ProtectedRoute path="/trending" component={Home} />
+          <ProtectedRoute path="/school/:schoolId" component={SchoolView} />
+          <ProtectedRoute path="/:username" component={Profile} />
         </Switch>
       </UserContext.Provider>
     </div>

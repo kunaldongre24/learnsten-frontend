@@ -27,7 +27,7 @@ export function timeSince(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
 
   var interval;
-  interval = seconds / 259200;
+  interval = seconds / (86400 * 28);
   if (interval > 1) {
     return "on " + dateFormat(date);
   }

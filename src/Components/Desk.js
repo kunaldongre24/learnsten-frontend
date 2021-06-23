@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../style/desk.css";
+import { getSchoolByUserId } from "./Api";
+import DeskView from "./DeskView";
 
-const n = 6;
-
-function Desk() {
+function Desk(props) {
+  const { userId } = props;
+  const [schools, setSchools] = useState([]);
+  const [loader, setLoader] = useState(false);
+  useEffect(() => {
+    const getSchoolByUser = async () => {
+      setLoader(true);
+      const schools = await getSchoolByUserId(userId);
+      setSchools(schools.data);
+      setLoader(false);
+    };
+    getSchoolByUser();
+  }, [userId]);
   return (
     <div>
-      <h2 className="heading">Popular Courses</h2>
-      <ol className="courses">
-        {[...Array(n)].map((e, i) => (
-          <li key={i}>
-            <span className="showCard"></span>
-          </li>
-        ))}
-      </ol>
+      <h2 className="heading">
+        {schools.length < 4 ? "Schools" : "Popular Schools"}
+      </h2>
+      <DeskView
+        loader={loader}
+        schools={schools}
+        setLoader={setLoader}
+        {...props}
+      />
     </div>
   );
 }

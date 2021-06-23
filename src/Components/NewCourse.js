@@ -3,7 +3,7 @@ import axios from "axios";
 import "../style/NewSchool.css";
 import ClearIcon from "@material-ui/icons/Clear";
 import SummaryBox from "./SummaryBox";
-import { getSchoolByUserId } from "./Api";
+import { getSchoolByUserId, suggestSubject } from "./Api";
 
 function NewCourse(props) {
   const { username, executeScroll, c_id, c_school } = props;
@@ -46,8 +46,14 @@ function NewCourse(props) {
   const removeSubject = (data) => {
     setSubjects(subjects.filter((item) => item !== data));
   };
-  const removeSubjectError = () => {
+  const handleChange = async (event) => {
     setSubjectError("");
+    const response = await suggestSubject(event.target.value);
+    if (response.data.length) {
+      console.log(response.data);
+    } else {
+      console.log(event.target.value);
+    }
   };
 
   const handleKeypress = (e) => {
@@ -195,7 +201,7 @@ function NewCourse(props) {
               className={`subjects light-blue`}
               id="subjects"
               name="subjects"
-              onChange={removeSubjectError}
+              onChange={handleChange}
               onKeyPress={handleKeypress}
               placeholder="Enter subjects here..."
               style={{
@@ -234,7 +240,7 @@ function NewCourse(props) {
           type="button"
           onClick={createNewCourse}
           name={`Register`}
-          value={Loader ? `Creating New School...` : `Create New School`}
+          value={Loader ? `Creating New Course...` : `Create New Course`}
           className={`register ${Loader ? `loadingBtn` : ``}`}
         />
       </form>

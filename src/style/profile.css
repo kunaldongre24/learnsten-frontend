@@ -33,6 +33,7 @@ ul.profile-nav {
 ul.profile-nav a {
   color: #586069;
 }
+
 ul.profile-nav li {
   display: inline-block;
   padding: 8px 16px;
@@ -63,7 +64,7 @@ ul.profile-nav .selected li svg {
   color: #24292e;
 }
 .display-profile {
-  margin-top: -42px;
+  margin-top: -56px;
 }
 .head li {
   border-color: transparent !important;
@@ -278,4 +279,15 @@ textarea {
 }
 .right-container.as {
   width: 25%;
+}
+.bullet {
+  height: 8px;
+  width: 8px;
+  display: block;
+  border-radius: 2em;
+  margin-right: 5px;
+}
+.alt-text {
+  margin-right: 10px;
+  margin-left: 4px;
 }

@@ -1,9 +1,8 @@
 .header {
-  height: 80px;
+  height: 60px;
   width: 100%;
   background-repeat: no-repeat;
-  background-size: auto 120px;
-  background-image: url("../images/stevejobs24.png");
+  background-size: auto 80px;
   background-position: left -10px;
   position: relative;
   top: 0;

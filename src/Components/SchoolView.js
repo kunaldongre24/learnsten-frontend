@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import "../style/SchoolView.css";
 import "../style/NoSidebar.css";
 import "../style/profile.css";
-import Desk from "./Desk";
 import Videos from "./Videos";
 import Courses from "./Courses";
 import Notes from "./Notes";
@@ -16,6 +15,8 @@ import { Route, Switch } from "react-router-dom";
 import GetUser from "./UserContext";
 import { getSchoolBySchoolId, getUserById } from "./Api";
 import Loader from "./Loader";
+import Bullet from "./Bullet";
+import SchoolHome from "./SchoolHome";
 
 export default function SchoolView(props) {
   const [schoolData, setSchoolData] = useState({});
@@ -77,30 +78,36 @@ export default function SchoolView(props) {
             <div
               style={{
                 maxWidth: "1228px",
-                padding: "24px 32px",
                 margin: "auto",
               }}
             >
-              <div style={{ height: "100px", display: "flex" }}>
+              <div style={{ padding: "24px", display: "flex" }}>
                 <div className="schoolProfile">
                   <div className="profileReplace">
                     <div className="letter">{schoolData.name.charAt(0)}</div>
                     <div className="shine"></div>
                   </div>
                 </div>
-                <div className="schoolInfo">
-                  <div className="school-left">
-                    <div className="school-name">{schoolData.name}</div>
+                <div className="school-left">
+                  <h1 className="school-name">{schoolData.name}</h1>
+                  <div className="school-desc">{schoolData.description}</div>
+                  <div className="last-row">
+                    <span className="courseCount">
+                      <Bullet color="#4ba55d" />
+                      {schoolData.courseCount}
+                      <span className="alt-text">
+                        {schoolData.courseCount === 1 ? "Course" : "Courses"}
+                      </span>
+                      <Bullet color="#747F8D" />0
+                      <span className="alt-text"> Members </span>
+                    </span>
                   </div>
                 </div>
                 <div className="school-right">
                   <button
                     className="join-school blue-btn"
                     style={{
-                      paddingLeft: "30px",
-                      paddingRight: "30px",
                       border: "none",
-                      display: "flex",
                     }}
                   >
                     {isMySchool ? "Edit" : "Join"}
@@ -159,7 +166,9 @@ export default function SchoolView(props) {
                     <Route
                       path={`/school/${schoolId}`}
                       exact
-                      component={Desk}
+                      render={() => (
+                        <SchoolHome schoolId={schoolId} {...props} />
+                      )}
                     />
                     <Route
                       path={`/school/${schoolId}/videos`}

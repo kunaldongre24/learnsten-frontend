@@ -11,12 +11,13 @@ function ActivityMap(props) {
   const [activities, setActivities] = useState([]);
   const [activityDetails, setActivityDetails] = useState();
   const [showDetails, setShowDetails] = useState(false);
+  const [distance, setDistance] = useState({});
 
   const setDetails = (event, value) => {
-    console.log(event);
     if (value) {
       const { count, date } = value;
-      return setActivityDetails(
+      setDistance(event);
+      setActivityDetails(
         `${count} ${count === 1 ? "activity" : "activities?"} on ${dateFormat(
           new Date(date)
         )}`
@@ -34,15 +35,16 @@ function ActivityMap(props) {
     };
     fetchActivities();
   }, [userId]);
+  console.log(distance);
   return (
     <div className="map-container">
-      {showDetails && activityDetails ? (
-        <div className="activity-pointer">
-          <div className="text">{activityDetails}</div>
-        </div>
-      ) : (
-        ""
-      )}
+      <div
+        className="activity-pointer"
+        hidden={showDetails && activityDetails ? "" : "hidden"}
+      >
+        <div className="text">{activityDetails}</div>
+      </div>
+
       {activities.length ? (
         <div className="d-flex">
           <CalenderHeatMap
@@ -57,7 +59,6 @@ function ActivityMap(props) {
             onMouseLeave={(event, value) => {
               setShowDetails(false);
             }}
-            onMouse
             values={[...activities]}
             classForValue={(value) => {
               if (value) {

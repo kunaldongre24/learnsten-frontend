@@ -243,6 +243,7 @@ class CalendarHeatmap extends React.Component {
   }
 
   renderSquare(dayIndex, index) {
+    const dataX = (index - dayIndex) / DAYS_IN_WEEK;
     const indexOutOfRange =
       index < this.getNumEmptyDaysAtStart() ||
       index >= this.getNumEmptyDaysAtStart() + this.getDateDifferenceInDays();
@@ -261,7 +262,7 @@ class CalendarHeatmap extends React.Component {
         y={y}
         rx="2"
         ry="2"
-        date={dayIndex}
+        data-x={dataX}
         className={this.getClassNameForIndex(index)}
         onClick={() => this.handleClick(value)}
         onMouseOver={(e) => this.handleMouseOver(e, value)}

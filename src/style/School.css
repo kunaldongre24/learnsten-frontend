@@ -108,6 +108,37 @@
 .newBtn .new-school {
   margin: 12px 0;
 }
+.no-courses {
+  padding: 24px;
+  padding-bottom: 36px;
+  text-align: center;
+  border-bottom: 1px solid #eaeaea;
+}
+.no-courses h2 {
+  font-weight: 600;
+}
+.no-logo {
+  margin: auto;
+  height: 120px;
+  width: 120px;
+  background-size: 100%;
+}
+.no-course-logo {
+  background-image: url("../images/course.png");
+}
+.no-video-logo {
+  background-image: url("../images/video.png");
+}
+.no-note-logo {
+  background-image: url("../images/notes.png");
+}
+.newBtn {
+  display: inline-block;
+  width: max-content;
+}
+.newBtn .new-school {
+  margin: 12px 0;
+}
 .join-school {
   height: 40px;
   padding-left: 20px;

@@ -11,7 +11,7 @@ function ProfileNavItem(props) {
   const countStyle = {
     padding: "2px 8px",
     borderRadius: "20px",
-    background: "#eaeaea",
+    background: "#E1E4E8",
     fontSize: "12px",
     color: "#222",
     marginLeft: "6px",

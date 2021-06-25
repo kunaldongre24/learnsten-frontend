@@ -3,6 +3,7 @@ import axios from "axios";
 import "../style/NewSchool.css";
 import ClearIcon from "@material-ui/icons/Clear";
 import SummaryBox from "./SummaryBox";
+import "../style/NewCourse.css";
 import { getSchoolByUserId, suggestSubject } from "./Api";
 
 function NewCourse(props) {
@@ -10,6 +11,7 @@ function NewCourse(props) {
   const [Error, setError] = useState(false);
   const [subjectError, setSubjectError] = useState("");
   const [subjects, setSubjects] = useState([]);
+  const [subjectSuggestions, setSubjectSuggestions] = useState([]);
   const [schools, setSchools] = useState([]);
   const [Loader, setLoader] = useState(false);
 
@@ -24,10 +26,14 @@ function NewCourse(props) {
   useEffect(() => {
     executeScroll();
   }, [executeScroll]);
-  const addSubjects = () => {
-    const string = document.getElementById("subjects").value;
-    const subject = string.replace(/\s+/g, " ").trim();
-
+  const addSubjects = (string) => {
+    var subject;
+    if (typeof string === "string") {
+      subject = string.replace(/\s+/g, " ").trim();
+    } else {
+      const str = document.getElementById("subjects").value;
+      subject = str.replace(/\s+/g, " ").trim();
+    }
     var bool = false;
     subjects.map((data) => {
       if (data.toLowerCase() === subject.toLowerCase()) {
@@ -37,29 +43,35 @@ function NewCourse(props) {
     });
 
     if (subject.trim().length > 0 && !bool) {
-      setSubjects((oldArray) => [...oldArray, subject]);
+      setSubjectSuggestions([]);
       document.getElementById("subjects").value = "";
+      return setSubjects((oldArray) => [...oldArray, subject]);
     } else if (bool) {
-      setSubjectError("this subject is already in the list");
+      return setSubjectError("this subject is already in the list");
     }
   };
   const removeSubject = (data) => {
     setSubjects(subjects.filter((item) => item !== data));
   };
   const handleChange = async (event) => {
+    const input = event.target.value;
     setSubjectError("");
-    const response = await suggestSubject(event.target.value);
-    if (response.data.length) {
-      console.log(response.data);
+    if (input.trim() === "") {
+      setSubjectSuggestions([]);
     } else {
-      console.log(event.target.value);
+      const response = await suggestSubject(input);
+      const suggestion = response.data;
+      if (suggestion.length === 1 && suggestion[0].name === input) {
+        setSubjectSuggestions(suggestion);
+      } else {
+        setSubjectSuggestions([{ name: input }, ...suggestion]);
+      }
     }
   };
-
   const handleKeypress = (e) => {
     //it triggers by pressing the enter key
     if (e.charCode === 13) {
-      addSubjects();
+      return addSubjects();
     }
   };
 
@@ -195,7 +207,7 @@ function NewCourse(props) {
               );
             })}
           </ul>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", flexDirection: "column" }}>
             <input
               type="text"
               className={`subjects light-blue`}
@@ -211,14 +223,28 @@ function NewCourse(props) {
                 borderBottomRightRadius: "0",
               }}
             />
-            <button
+            <ul className="subject-suggestions">
+              {subjectSuggestions.map((data, i) => (
+                <li
+                  key={i}
+                  className="data-row-item"
+                  onClick={() => addSubjects(data.name)}
+                >
+                  <div className="suggested-text">{data.name}</div>
+                  <button type="button" className="select">
+                    Select
+                  </button>
+                </li>
+              ))}
+            </ul>
+            {/* <button
               onClick={addSubjects}
               type="button"
               id="addSubject"
               className="addSubject"
             >
               Add Subject
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="helper">

@@ -54,6 +54,12 @@ export async function suggestSubject(subject) {
   );
   return response;
 }
+export async function getActivityByUserId(userId) {
+  const response = await axios.get(
+    `http://localhost:8000/api/v1/activity/${userId}`
+  );
+  return response;
+}
 // export async function login(id) {
 //   return await resolve(
 //     axios.get(`http://some-api.com/users/${id}`).then((res) => res.data)

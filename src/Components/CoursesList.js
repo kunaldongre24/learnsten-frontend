@@ -60,7 +60,7 @@ function CoursesList(props) {
         ) : courses.length ? (
           courses.map((course) =>
             course.ownerId === c_id || !course.privacy ? (
-              <div className="school-info" key={course.id}>
+              <div className="school-info detailed" key={course.id}>
                 <div className="school-left">
                   <h1>
                     <Link to={`/course/${course.id}`}>{course.name}</Link>

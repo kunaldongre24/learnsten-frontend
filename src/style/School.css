@@ -39,10 +39,10 @@
   margin-top: -16px;
   padding-top: 16px;
   padding-bottom: 16px;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #e1e4e8;
 }
 .school-info h1 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: normal;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -53,15 +53,16 @@
   display: flex;
   width: calc(50% - 5px);
   box-sizing: border-box;
-  border: 1px solid #eaeaea;
+  border: 1px solid #e1e4e8;
   margin-top: 10px;
   border-radius: 4px;
 }
 .detailed {
+  padding: 24px 0;
   width: 100% !important;
   margin: 0;
   border: none;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #e1e4e8;
 }
 .school-body {
   display: flex;
@@ -79,7 +80,7 @@
   padding: 24px;
   padding-bottom: 36px;
   text-align: center;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #e1e4e8;
 }
 .no-courses h2 {
   font-weight: 600;

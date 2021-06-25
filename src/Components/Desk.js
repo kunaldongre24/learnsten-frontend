@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import "../style/desk.css";
 import { getSchoolByUserId } from "./Api";
 import DeskView from "./DeskView";
+import ActivityMap from "./ActivityMap";
 
 function Desk(props) {
-  const { userId } = props;
+  const { userId, isMyProfile, username } = props;
   const [schools, setSchools] = useState([]);
   const [loader, setLoader] = useState(false);
   useEffect(() => {
@@ -27,6 +28,12 @@ function Desk(props) {
         setLoader={setLoader}
         {...props}
       />
+      <h2 className="heading">
+        {isMyProfile ? "Your" : `${username}'s`} activities
+      </h2>
+      <div className="activity-map">
+        <ActivityMap userId={userId} />
+      </div>
     </div>
   );
 }

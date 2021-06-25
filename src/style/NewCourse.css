@@ -1,0 +1,39 @@
+ul.subject-suggestions {
+  display: block;
+  width: 100%;
+  list-style: none;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
+}
+ul.subject-suggestions li {
+  display: flex;
+  width: 100%;
+  padding: 7px 12px;
+  border-top: 1px solid #e1e4e8;
+  justify-content: space-between;
+  cursor: pointer;
+}
+ul.subject-suggestions li:first-of-type {
+  background: #edebf7;
+}
+ul.subject-suggestions button {
+  padding: 2px 5px;
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #dbdbdb;
+  color: #586069;
+  border-radius: 4px;
+  display: none;
+}
+.suggested-text {
+  display: flex;
+  align-items: center;
+}
+.subjects {
+  display: block;
+}
+ul.subject-suggestions li:hover > button {
+  display: block;
+}
+ul.subject-suggestions li:hover {
+  background: #edebf7;
+}

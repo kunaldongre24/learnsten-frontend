@@ -90,9 +90,13 @@ function SchoolList(props) {
                   Updated {timeSince(new Date(school.last_updated))}
                 </span>
               </div>
-              <div className="school-right">
-                <button className="join-school">Join</button>
-              </div>
+              {isMyProfile ? (
+                ""
+              ) : (
+                <div className="school-right">
+                  <button className="join-school">Join</button>
+                </div>
+              )}
             </div>
           ))
         )}

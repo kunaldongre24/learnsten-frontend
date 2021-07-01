@@ -1,22 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../style/NoSidebar.css";
 import "../style/profile.css";
+import "../style/School.css";
+import "../style/SchoolView.css";
 import Desk from "./Desk";
 import Activities from "./Activities";
-import School from "./School";
 import Notes from "./Notes";
 import ImportContactsOutlinedIcon from "@material-ui/icons/ImportContactsOutlined";
 import HistoryIcon from "@material-ui/icons/History";
-import SchoolOutlinedIcon from "@material-ui/icons/SchoolOutlined";
+import VideoLibraryOutlinedIcon from "@material-ui/icons/VideoLibraryOutlined";
 import BookOutlinedIcon from "@material-ui/icons/BookOutlined";
 import PeopleOutlineIcon from "@material-ui/icons/PeopleOutline";
 import NavItems from "./NavItems";
-import { getSchoolByUserId } from "./Api";
 import { Route } from "react-router-dom";
 import ProfileImage from "../images/wl.jpeg";
 import GetUser from "./UserContext";
 import { getUserByUsername } from "./Api";
 import axios from "axios";
+import Courses from "./Courses";
 
 export default function Profile(props) {
   var c_user, c_id;
@@ -26,8 +27,6 @@ export default function Profile(props) {
     c_id = user_data.data[0].id;
   }
   const [user, setUser] = useState({});
-  const [schoolCount, setSchoolCount] = useState("");
-  // @TODO add the value of username inside the cookie.....
   const Username = props.match.params.username;
   async function fetchData() {
     const user = await getUserByUsername(Username);
@@ -37,13 +36,7 @@ export default function Profile(props) {
   }
   const { id, name, username, email, bio, location, twitter, url, institute } =
     user;
-  useEffect(() => {
-    const getSchoolData = async () => {
-      const schoolCount = await (await getSchoolByUserId(id)).data.length;
-      setSchoolCount(schoolCount);
-    };
-    getSchoolData();
-  }, [id]); //getting user details by username
+  //getting user details by username
 
   useEffect(() => {
     async function fetchData() {
@@ -125,10 +118,9 @@ export default function Profile(props) {
                     Icon={HistoryIcon}
                   />
                   <NavItems
-                    Path={`/${username}/school`}
-                    Title="School"
-                    Icon={SchoolOutlinedIcon}
-                    Count={schoolCount}
+                    Path={`/${username}/courses`}
+                    Title="Courses"
+                    Icon={VideoLibraryOutlinedIcon}
                   />
                   <NavItems
                     Path={`/${username}/notes`}
@@ -389,7 +381,6 @@ export default function Profile(props) {
                     <Desk
                       username={username}
                       userId={id}
-                      c_id={c_id}
                       isMyProfile={my_profile}
                       {...props}
                     />
@@ -400,14 +391,15 @@ export default function Profile(props) {
                   component={Activities}
                 />
                 <Route
-                  path={`/${username}/school`}
+                  path={`/${username}/courses`}
                   render={() => (
-                    <School
+                    <Courses
                       username={username}
                       userId={id}
-                      c_id={c_id}
+                      user={user}
                       isMyProfile={my_profile}
                       {...props}
+                      headRef={ref}
                     />
                   )}
                 />

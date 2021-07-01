@@ -1,12 +1,10 @@
 import React from "react";
-import Bullet from "./Bullet";
 import { timeSince } from "./Utils";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
 
 function DeskView(props) {
-  const { loader, schools, userId } = props;
-
+  const { loader, courses, userId } = props;
   return (
     <div className="desk-body">
       {loader ? (
@@ -14,36 +12,43 @@ function DeskView(props) {
           <Loader style={{ margin: "auto" }} />
         </div>
       ) : (
-        schools.map((school) => (
-          <div className="school-info" key={school.id}>
+        courses.slice(0, 6).map((course) => (
+          <div className="school-info" key={course.id}>
             <div className="schoolProfile">
               <div className="profileReplace">
-                <div className="letter">{school.name.charAt(0)}</div>
+                <div className="letter">{course.name.charAt(0)}</div>
                 <div className="shine"></div>
               </div>
             </div>
             <div className="school-left">
               <h1>
-                <Link to={`/school/${school.id}`}>{school.name}</Link>
+                <Link to={`/course/${course.id}`}>{course.name}</Link>
               </h1>
-              <div className="school-desc">{school.description}</div>
+              {course.subtitle ? (
+                <div className="school-desc">course.subtitle</div>
+              ) : (
+                ""
+              )}
               <div className="last-row">
-                <span className="courseCount">
-                  <Bullet color="#4ba55d" />
-                  {school.courseCount}
-                  <span className="alt-text">
-                    {school.courseCount === 1 ? "Course" : "Courses"}
+                <div className="box">
+                  <span className="followers">
+                    {course.lectureCount}{" "}
+                    <span className="text">
+                      {course.lectureCount === 1 ? "course" : "courses"}
+                    </span>
                   </span>
-                  <Bullet color="#747F8D" />0
-                  <span className="alt-text"> Members </span>
-                </span>
+                  {" · "}
+                  <span className="following">
+                    0 <span className="text"> members </span>
+                  </span>
+                </div>
               </div>
               <span className="last-update">
-                Updated {timeSince(new Date(school.last_updated))}
+                Updated {timeSince(new Date(course.last_updated))}
               </span>
             </div>
             <div className="school-right">
-              {school.ownerId === userId ? (
+              {course.ownerId === userId ? (
                 ""
               ) : (
                 <button className="join-school">Join</button>

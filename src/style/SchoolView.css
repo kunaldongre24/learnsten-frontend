@@ -27,7 +27,6 @@
   font-weight: normal;
 }
 .school-desc {
-  display: none;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 14px;
@@ -45,5 +44,5 @@
 }
 .join-school.blue-btn {
   color: #fff;
-  background: #1671e6;
+  background: #278799;
 }

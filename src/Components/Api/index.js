@@ -12,21 +12,15 @@ export async function getUserById(userId) {
   );
   return response;
 }
-export async function getSchoolByUserId(userId) {
+export async function getCourseById(courseId) {
   const response = await axios.get(
-    `http://localhost:8000/api/v1/school/user/${userId}`
+    `http://localhost:8000/api/v1/course/${courseId}`
   );
   return response;
 }
-export async function getSchoolBySchoolId(schoolId) {
+export async function getCoursesByUserId(userId) {
   const response = await axios.get(
-    `http://localhost:8000/api/v1/school/${schoolId}`
-  );
-  return response;
-}
-export async function getCoursesBySchoolId(schoolId) {
-  const response = await axios.get(
-    `http://localhost:8000/api/v1/course/school/${schoolId}`
+    `http://localhost:8000/api/v1/course/user/${userId}`
   );
   return response;
 }
@@ -42,15 +36,10 @@ export async function getSubjectById(subjectId) {
   );
   return response;
 }
-export async function countCourseBySchoolId(subjectId) {
-  const response = await axios.get(
-    `http://localhost:8000/api/v1/course/courseCount/${subjectId}`
-  );
-  return response;
-}
 export async function suggestSubject(subject) {
   const response = await axios.get(
-    `http://localhost:8000/api/v1/subject/suggestions/${subject}`
+    `http://localhost:8000/api/v1/subject/suggestions/${subject}`,
+    { withCredentials: true }
   );
   return response;
 }
@@ -60,6 +49,17 @@ export async function getActivityByUserId(userId) {
   );
   return response;
 }
+export async function getAllCategories() {
+  const response = await axios.get(`http://localhost:8000/api/v1/category`);
+  return response;
+}
+export async function getSubcategoriesByCategoryId(categoryId) {
+  const response = await axios.get(
+    `http://localhost:8000/api/v1/category/subcategories/${categoryId}`
+  );
+  return response;
+}
+
 // export async function login(id) {
 //   return await resolve(
 //     axios.get(`http://some-api.com/users/${id}`).then((res) => res.data)

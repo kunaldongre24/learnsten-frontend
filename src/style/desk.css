@@ -26,8 +26,59 @@
 .activity-pointer {
   position: absolute;
   font-size: 12px;
-  color: #fff;
+  color: #bbb;
   padding: 7px 12px;
-  background: #000;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 4px;
+  pointer-events: none;
+}
+.activity-pointer .activity-text {
+  white-space: nowrap;
+}
+.activity-text strong {
+  font-weight: 600;
+  color: #fff;
+}
+.activity-footer {
+  color: #586069;
+  font-size: 12px;
+  padding-top: 5px;
+}
+.color-info {
+  display: flex;
+  justify-content: flex-end;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.color-box {
+  height: 12px;
+  width: 12px;
+  border: 1px solid rgba(27, 31, 35, 0.06);
+  display: inline-block;
+  margin-left: 3px;
+  border-radius: 2px;
+}
+.box-color {
+  margin: 1px 5px;
+}
+.color-scale-0 {
+  fill: #ebedf0;
+  background: #ebedf0;
+}
+.color-scale-1 {
+  fill: #9be9a8;
+  background: #9be9a8;
+}
+.color-scale-2 {
+  fill: #5cc464;
+  background: #5cc464;
+}
+.color-scale-3 {
+  fill: #4ba24e;
+  background: #4ba24e;
+}
+.color-scale-4 {
+  fill: #306e39;
+  background: #306e39;
 }

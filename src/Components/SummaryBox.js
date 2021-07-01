@@ -10,19 +10,19 @@ function SummaryBox(props) {
     menuDirection,
     listArray,
     name,
-    c_school,
+    current_item,
   } = props;
-  const [schoolName, setSchoolName] = useState(c_school);
+  const [itemName, setItemName] = useState(current_item);
   var menuStyle;
   if (menuDirection === "left") {
     menuStyle = { left: 0 };
   } else {
     menuStyle = { right: 0 };
   }
-  const handleSelect = (schoolName) => {
+  const handleSelect = (itemName) => {
     const details = document.querySelectorAll("details");
     details[0].removeAttribute("open");
-    setSchoolName(schoolName);
+    setItemName(itemName);
   };
   return (
     <details className="menu noselect">
@@ -42,19 +42,19 @@ function SummaryBox(props) {
             className="summary-image"
             alt=""
           />
-        ) : schoolName ? (
+        ) : itemName ? (
           <span
             className="list-image"
             style={{ float: "left", marginLeft: "0", lineHeight: 1.5 }}
           >
-            {schoolName.charAt(0)}
+            {itemName.charAt(0)}
           </span>
         ) : (
           ""
         )}
 
         <span className="css-truncate css-truncate-target ml-1 ">
-          {text ? text : schoolName}
+          {text ? text : itemName}
         </span>
         <span className="dropdown-caret"></span>
       </summary>
@@ -79,7 +79,7 @@ function SummaryBox(props) {
                             marginLeft: "4px",
                             width: "18px",
                             display:
-                              item.name === schoolName ? "block" : "none",
+                              itemName === item.username ? "block" : "none",
                           }}
                         />
                       </span>
@@ -88,13 +88,17 @@ function SummaryBox(props) {
                         name={name}
                         id={item.id}
                         value={item.id}
-                        defaultChecked={item.name === c_school ? true : false}
-                        onClick={() => handleSelect(item.name)}
+                        defaultChecked={
+                          item.username === current_item ? true : false
+                        }
+                        onClick={() => handleSelect(item.username)}
                         style={{ display: "none" }}
                       />
 
-                      <span className="list-image">{item.name.charAt(0)}</span>
-                      <span>{item.name}</span>
+                      <span className="list-image">
+                        {item.username.charAt(0)}
+                      </span>
+                      <span>{item.username}</span>
                     </div>
                   </label>
                 ))

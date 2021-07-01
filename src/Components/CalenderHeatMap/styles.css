@@ -27,19 +27,3 @@
 /*
  *  color scale
  */
-
-.react-calendar-heatmap .color-scale-0 {
-  fill: #ebedf0;
-}
-.react-calendar-heatmap .color-scale-1 {
-  fill: #9be9a8;
-}
-.react-calendar-heatmap .color-scale-2 {
-  fill: #5cc464;
-}
-.react-calendar-heatmap .color-scale-3 {
-  fill: #4ba24e;
-}
-.react-calendar-heatmap .color-scale-4 {
-  fill: #306e39;
-}

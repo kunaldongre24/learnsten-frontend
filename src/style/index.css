@@ -87,3 +87,57 @@ a {
     --navbar-width: 25%;
   }
 }
+
+@media screen and (min-width: 887px) {
+  :root {
+    --lst-grid-items-per-row: 3;
+    --lst-grid-item-margin: 16px;
+  }
+  @media screen and (min-width: 1128px) {
+    :root {
+      --lst-grid-items-per-row: 3;
+      --lst-grid-item-margin: 16px;
+    }
+    @media screen and (min-width: 1312px) {
+      :root {
+        --lst-grid-items-per-row: 5;
+        --lst-grid-item-margin: 16px;
+        --lst-content-img-max-width: 1112px;
+        --lst-content-active-img-max-width: 1112px;
+      }
+      @media screen and (min-width: 1440px) {
+        :root {
+          --lst-grid-items-per-row: 4;
+          --lst-grid-item-margin: 16px;
+          --lst-content-img-max-width: 1205px;
+          --lst-content-active-img-max-width: 1205px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1311px) {
+  :root {
+    --lst-content-width: calc(100% - 72px);
+    --lst-active-modal-width: 240px;
+    --lst-active-sidebar-width: 72px;
+    --lst-inactive-sidebar-width: 72px;
+    --lst-grid-items-per-row: 4;
+    --lst-grid-item-margin: 16px;
+    --lst-content-img-max-width: calc(1240px - 168px);
+    --lst-content-active-img-max-width: 1240px;
+  }
+  @media screen and (max-width: 1127px) {
+    :root {
+      --lst-grid-items-per-row: 3;
+      --lst-grid-item-margin: 16px;
+    }
+    @media screen and (max-width: 886px) {
+      :root {
+        --lst-grid-items-per-row: 2;
+        --lst-grid-item-margin: 16px;
+      }
+    }
+  }
+}

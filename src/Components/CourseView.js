@@ -7,7 +7,6 @@ import ReplyIcon from "@material-ui/icons/Reply";
 import InfoIcon from "@material-ui/icons/Info";
 import StarRatings from "react-star-ratings";
 import Cookies from "js-cookie";
-import replaceImage from "../images/replace.png";
 
 import {
   getCourseById,
@@ -51,16 +50,17 @@ export default function CourseView(props) {
       setSubjects((prev) => [...prev, subjects.data[0]]);
     });
   };
-  const iconStyle = { fontSize: "16px", marginRight: "10px", color: "#586069" };
+  const iconStyle = { fontSize: "16px", marginRight: "10px", color: "#64DE98" };
 
   const { username } = owner;
-  const { name, last_updated, ownerId, subtitle, language } = course;
+  const { name, last_updated, ownerId, subtitle, language, course_image_url } =
+    course;
   return (
     <div className="profile-all no-sidebar">
-      {name ? (
+      {course ? (
         <div className="content course-view">
           <div
-            className="space news"
+            className="space news dark"
             style={{
               height: "auto",
               padding: "10px",
@@ -142,7 +142,10 @@ export default function CourseView(props) {
                   </div>
                 </div>
                 <div className="right-box">
-                  <img src={replaceImage} alt="course-preview" />
+                  <img
+                    src={`http://localhost:8000/${course_image_url}`}
+                    alt="course-preview"
+                  />
                   <div className="side-course">
                     <button className="course-btn full-theme">
                       Join this course

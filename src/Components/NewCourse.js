@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../style/NewSchool.css";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -12,8 +12,10 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { stateToHTML } from "draft-js-export-html";
 import { getSubcategoriesByCategoryId, getAllCategories } from "./Api";
 import replaceImage from "../images/replace.png";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
 
-function NewCourse() {
+function NewCourse(props) {
   const user = GetUser();
   var username, c_user;
   if (user.data) {
@@ -29,30 +31,41 @@ function NewCourse() {
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [showSubcategory, setShowSubcategory] = useState(false);
-  const [files, setFile] = useState("");
+  const [uploadProgress, setUploadProgress] = useState();
+  const [image, setImage] = useState(null);
+  const [data, setData] = useState("");
+  const [croppedImg, setCroppedImg] = useState("");
   const [filename, setFilename] = useState("");
-
-  const uploadFile = async (event) => {
-    if (event.target.files[0]) {
-      const file = event.target.files[0];
-      setFile(file);
+  const [crop, setCrop] = useState({
+    unit: "%",
+    width: 100,
+    aspect: 722 / 422,
+  });
+  const ImageUploader = async (file) => {
+    var response;
+    if (file) {
       setFilename(file.name);
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = async (e) => {
-        console.log(e.target.result)
-        const formData = { file: e.target.result };
-        const response = await axios.post(
-          `http://localhost:8000/api/v1/upload/image`,
-          formData,
-          {
-            withCredentials: true,
-          }
-        );
-        console.log(response);
-      };
+      const formData = new FormData();
+      formData.append("image", file, file.name);
+      response = await axios.post(
+        `http://localhost:8000/api/v1/upload/singleFile`,
+        formData,
+        {
+          onUploadProgress: (ProgressEvent) => {
+            setUploadProgress(
+              Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100)
+            );
+          },
+        }
+      );
+    }
+    return response;
+  };
+  const uploadFile = async (file) => {
+    const response = await ImageUploader(file);
+    if (response.data) {
+      setData(response.data);
     } else {
-      setFile("");
       setFilename("");
     }
   };
@@ -70,7 +83,52 @@ function NewCourse() {
       setShowSubcategory(false);
     }
   };
+  const getCroppedImg = async (image, crop, fileName) => {
+    const cropwidth = (image.naturalWidth * crop.width) / 100;
+    const cropheight = (image.naturalHeight * crop.height) / 100;
+    const cropx = (image.width * crop.x) / 100;
+    const cropy = (image.height * crop.y) / 100;
 
+    const canvas = document.createElement("canvas");
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    canvas.width = cropwidth;
+    canvas.height = cropheight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(
+      image,
+      cropx * scaleX,
+      cropy * scaleY,
+      cropwidth * scaleX,
+      cropheight * scaleY,
+      0,
+      0,
+      cropwidth * scaleX,
+      cropheight * scaleY
+    );
+    const imageExt = fileName.split(".").pop();
+    const base64Image = canvas.toDataURL("image/" + imageExt);
+    const croppedImage = base64StringtoFile(base64Image, fileName);
+    const response = await ImageUploader(croppedImage);
+    if (response.data) {
+      if (response.data) {
+        setCroppedImg(response.data);
+      } else {
+        setCroppedImg();
+      }
+    }
+  };
+  function base64StringtoFile(base64String, filename) {
+    var arr = base64String.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  }
   useEffect(() => {
     async function fetchCategories() {
       const categories = await getAllCategories();
@@ -133,37 +191,43 @@ function NewCourse() {
   const createNewCourse = async (e) => {
     e.preventDefault();
     if (!document.getElementById("courseName").value.trim()) {
-      setError("Course name cannot be empty.");
-    } else if (!subjects.length) {
-      setError("Add atleast one subject.");
-    } else {
-      setError("");
-      setLoader(true);
-      e.preventDefault();
-      const request = {
-        name: document.getElementById("courseName").value,
-        subtitle: document.getElementById("subtitle").value,
-        description: stateToHTML(editorState.getCurrentContent()),
-        ownerId: document.querySelector('input[name="owner"]:checked').value,
-        language: document.getElementById("selectLang").value,
-        category: document.getElementById("category").value,
-        subcategory: document.getElementById("subCategory").value,
-        subjects: subjects,
-        privacy: document.querySelector('input[name="privacy"]:checked').value,
-      };
-      const result = await axios.post(
-        "http://localhost:8000/api/v1/course/",
-        request,
-        { withCredentials: true }
-      );
-      const { message, err } = result.data;
-      if (err) setError(err);
-      if (message) {
-        if (message === "success") {
-        }
-      }
-      setLoader(false);
+      return setError("Course name cannot be empty.");
     }
+    if (!subjects.length) {
+      return setError("Add atleast one subject.");
+    }
+    if (!data.path) {
+      return setError("Please select a course image.");
+    }
+    setError("");
+    setLoader(true);
+    e.preventDefault();
+    const request = {
+      name: document.getElementById("courseName").value,
+      subtitle: document.getElementById("subtitle").value,
+      description: stateToHTML(editorState.getCurrentContent()),
+      ownerId: document.querySelector('input[name="owner"]:checked').value,
+      language: document.getElementById("selectLang").value,
+      category: document.getElementById("category").value,
+      subcategory: document.getElementById("subCategory").value,
+      subjects: subjects,
+      course_image_url: croppedImg.path,
+      privacy: document.querySelector('input[name="privacy"]:checked').value,
+    };
+    const result = await axios.post(
+      "http://localhost:8000/api/v1/course/",
+      request,
+      { withCredentials: true }
+    );
+    const { courseId, err } = result.data;
+    console.log(err);
+    if (err) {
+      return setError(err);
+    }
+    if (courseId) {
+      return props.history.push(`/course/${courseId}/`);
+    }
+    setLoader(false);
   };
   return (
     <div className="NewSchool">
@@ -435,43 +499,129 @@ function NewCourse() {
           </div>
         </div>
         <div className="replace-image">
-          <img
-            className="image-upload"
-            src={replaceImage}
-            alt="course-preview"
-          />
+          <div>
+            {data ? (
+              croppedImg ? (
+                <img
+                  src={`http://localhost:8000/${croppedImg.path}`}
+                  style={{ width: "100%", border: "1px solid #eaeaea" }}
+                  className="image-upload"
+                  alt="cropped image"
+                />
+              ) : (
+                <ReactCrop
+                  src={`http://localhost:8000/${data.path}`}
+                  crop={crop}
+                  imageStyle={{
+                    width: "100%",
+                    maxHeight: "100%",
+                    minWidth: "1px",
+                    border: "1px solid #eaeaea",
+                  }}
+                  onChange={(crop, percentCrop) => {
+                    setCrop(percentCrop);
+                  }}
+                  onImageLoaded={(image) => setImage(image)}
+                  keepSelection
+                  crossorigin="anonymous"
+                />
+              )
+            ) : (
+              <img
+                className="image-upload"
+                src={replaceImage}
+                alt="course-preview"
+                style={{ width: "100%" }}
+              />
+            )}
+          </div>
           <div>
             Upload your course image here. It must meet our course image quality
-            standards to be accepted. Important guidelines: 750x422 pixels;
-            .jpg, .jpeg,. gif, or .png.
-            <label htmlFor="replace-image" className="replace-label">
-              <input
-                type="text"
-                readOnly
-                placeholder={filename ? filename : "No file selected"}
-              />
-              <span>
-                <span
-                  className="upload-btn"
-                  onClick={
-                    filename
-                      ? () => {
-                          setFile("");
-                          setFilename("");
-                        }
-                      : () => {}
-                  }
+            standards to be accepted. Important guidelines: .jpg, .jpeg,. gif,
+            or .png.
+            {data && !croppedImg ? (
+              <button
+                type="button"
+                className="cropBtn"
+                onClick={() =>
+                  getCroppedImg(image, crop, data.path.split("/").pop())
+                }
+              >
+                Crop
+              </button>
+            ) : (
+              <div
+                htmlFor="replace-image"
+                onClick={() =>
+                  uploadProgress
+                    ? ""
+                    : document.getElementById("replace-image").click()
+                }
+                className="replace-label"
+              >
+                <input
+                  type="text"
+                  readOnly
+                  placeholder={filename ? filename : "No file selected"}
+                  style={{ display: uploadProgress ? "none" : "block" }}
+                />
+                <div
+                  className="progressBar"
+                  style={{
+                    display: uploadProgress ? "block" : "none",
+                    pointerEvents: "none",
+                  }}
                 >
-                  {filename ? "Change" : "Upload file"}
+                  <div
+                    className="indicator"
+                    style={{ width: `${uploadProgress}%` }}
+                  >{`${
+                    uploadProgress
+                      ? data
+                        ? "Uploaded"
+                        : uploadProgress === 100
+                        ? "Processing..."
+                        : uploadProgress + "%"
+                      : ""
+                  }`}</div>
+                </div>
+                <span>
+                  <span
+                    className="upload-btn"
+                    onClick={
+                      uploadProgress
+                        ? () => {
+                            setData("");
+                            setImage(null);
+                            setCrop({
+                              unit: "%",
+                              width: 100,
+                              aspect: 720 / 422,
+                            });
+                            setFilename("");
+                            setCroppedImg("");
+                            setUploadProgress("");
+                          }
+                        : () => {}
+                    }
+                  >
+                    {uploadProgress
+                      ? data
+                        ? "Change"
+                        : "Cancel"
+                      : "Upload file"}
+                  </span>
                 </span>
-              </span>
-            </label>
+              </div>
+            )}
             <input
               accept=".gif,.jpg,.jpeg,.png"
               type="file"
               className="file-uploader"
               id="replace-image"
-              onChange={uploadFile}
+              onChange={(e) => {
+                uploadFile(e.target.files[0]);
+              }}
             />
           </div>
         </div>

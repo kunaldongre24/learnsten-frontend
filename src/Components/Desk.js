@@ -11,7 +11,7 @@ function Desk(props) {
   useEffect(() => {
     const fetchCourses = async () => {
       setLoader(true);
-      const courses = await getCoursesByUserId(1);
+      const courses = await getCoursesByUserId(userId);
       if (courses.data.length > 6) {
         setCourses(courses.data.filter((course) => course.lectureCount > 1));
       } else {

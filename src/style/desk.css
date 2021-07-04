@@ -3,10 +3,7 @@
   font-size: 16px;
 }
 .desk-body {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .activity-map {
   padding: 8px;
@@ -51,6 +48,13 @@
   padding-left: 32px;
   padding-right: 32px;
 }
+.no-space {
+  margin-left: calc(-1 * var(--lst-grid-item-margin) / 2);
+  margin-right: calc(-1 * var(--lst-grid-item-margin) / 2);
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
 .color-box {
   height: 12px;
   width: 12px;
@@ -81,4 +85,19 @@
 .color-scale-4 {
   fill: #306e39;
   background: #306e39;
+}
+.column {
+  flex-direction: column;
+  width: calc(
+    100% / var(--lst-grid-items-per-row) - var(--lst-grid-item-margin) - 0.01px
+  );
+  margin-left: calc(var(--lst-grid-item-margin) / 2);
+  margin-right: calc(var(--lst-grid-item-margin) / 2);
+}
+.column img {
+  margin: 0;
+  height: auto;
+}
+.pd-10 {
+  padding: 4px 0 8px;
 }

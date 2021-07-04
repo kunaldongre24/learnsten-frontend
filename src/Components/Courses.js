@@ -61,6 +61,12 @@ function CoursesList(props) {
           courses.map((course) =>
             course.ownerId === userId || !course.privacy ? (
               <div className="school-info detailed" key={course.id}>
+                <img
+                  className="course-image"
+                  alt="course"
+                  src={`http://localhost:8000/${course.course_image_url}`}
+                />
+
                 <div className="school-left">
                   <h1>
                     <Link to={`/course/${course.id}`}>{course.name}</Link>

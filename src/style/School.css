@@ -43,22 +43,22 @@
 }
 .school-info h1 {
   font-size: 18px;
-  font-weight: normal;
+  font-weight: 600;
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
 }
 .school-info {
   white-space: nowrap;
-  padding: 16px;
   display: flex;
   width: calc(50% - 5px);
   box-sizing: border-box;
-  border: 1px solid #e1e4e8;
   margin-top: 10px;
-  border-radius: 4px;
+  margin-bottom: 10px;
+  overflow: hidden;
 }
 .detailed {
-  padding: 24px 0;
+  padding: 18px 0;
   width: 100% !important;
   margin: 0;
   border: none;

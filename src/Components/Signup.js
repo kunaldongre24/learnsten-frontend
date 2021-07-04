@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../style/Signup.css";
-import Load from "./Loader";
 import axios from "axios";
 
 function Signup() {
@@ -10,7 +9,6 @@ function Signup() {
   const [UserValid, setUserValid] = useState({});
   const [EmailValid, setEmailValid] = useState({});
   const [PasswordValid, setPasswordValid] = useState({});
-  const [ValidateLoader, setValidateLoader] = useState({});
 
   const signupApi = async (e) => {
     setLoader(true);
@@ -31,7 +29,6 @@ function Signup() {
     setLoader(false);
   };
   const validateUsername = async (e) => {
-    setValidateLoader({ username: "1" });
     const request = { username: e.target.value };
     const result = await axios.post(
       "http://localhost:8000/api/v1/auth/validateusername",
@@ -39,10 +36,8 @@ function Signup() {
       { withCredentials: true }
     );
     setUserValid(result.data);
-    setValidateLoader({});
   };
   const validateEmail = async (e) => {
-    setValidateLoader({ email: "1" });
     const request = { email: e.target.value };
     const result = await axios.post(
       "http://localhost:8000/api/v1/auth/validateemail",
@@ -51,7 +46,6 @@ function Signup() {
     );
 
     setEmailValid(result.data);
-    setValidateLoader({});
   };
   const validatePassword = (e) => {
     if (e.target.value.length > 5) {
@@ -117,9 +111,7 @@ function Signup() {
         ) : (
           ""
         )}
-        <span className="valid-check">
-          {ValidateLoader.username ? <Load /> : ""}
-        </span>
+
         <label htmlFor="email">
           Email address <span className="req">*</span>
         </label>
@@ -147,9 +139,7 @@ function Signup() {
         ) : (
           ""
         )}
-        <span className="valid-check">
-          {ValidateLoader.email ? <Load /> : ""}
-        </span>
+
         <label htmlFor="password">
           Password <span className="req">*</span>
         </label>

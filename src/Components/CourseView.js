@@ -148,7 +148,7 @@ export default function CourseView(props) {
                   />
                   <div className="side-course">
                     <button className="course-btn full-theme">
-                      Join this course
+                      {"Join this course"}
                     </button>
                   </div>
                 </div>

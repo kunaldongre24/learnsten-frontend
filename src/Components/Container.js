@@ -8,7 +8,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import { UserContext } from "./UserContext";
 import ProtectedRoute from "./ProtectedRoute";
-import CourseView from "./CourseView";
+import Course from "./Course";
 import NewCourse from "./NewCourse";
 
 export default function Content() {
@@ -26,7 +26,7 @@ export default function Content() {
           <ProtectedRoute path="/subjects" component={Home} />
           <ProtectedRoute path="/groups" component={Home} />
           <ProtectedRoute path="/trending" component={Home} />
-          <ProtectedRoute path="/course/:courseId" component={CourseView} />
+          <ProtectedRoute path="/course/:courseId" component={Course} />
           <ProtectedRoute path="/new" component={NewCourse} />
           <ProtectedRoute path="/:username" component={Profile} />
         </Switch>

@@ -1,5 +1,4 @@
 import React from "react";
-import { timeSince } from "./Utils";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
 
@@ -32,9 +31,9 @@ function DeskView(props) {
                 <div className="last-row">
                   <div className="box">
                     <span className="followers">
-                      {course.lectureCount}{" "}
+                      {course.lecture_count}{" "}
                       <span className="text">
-                        {course.lectureCount === 1 ? "course" : "courses"}
+                        {course.lecture_count === 1 ? "course" : "courses"}
                       </span>
                     </span>
                     {" · "}

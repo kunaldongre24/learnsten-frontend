@@ -13,7 +13,7 @@ function Desk(props) {
       setLoader(true);
       const courses = await getCoursesByUserId(userId);
       if (courses.data.length > 6) {
-        setCourses(courses.data.filter((course) => course.lectureCount > 1));
+        setCourses(courses.data.filter((course) => course.lecture_count > 1));
       } else {
         setCourses(courses.data);
       }

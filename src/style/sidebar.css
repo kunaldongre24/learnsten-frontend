@@ -12,7 +12,6 @@
 .sidebar-all .content {
   width: calc(100% - var(--navbar-width));
   min-width: calc(100% - 350px);
-  background-color: #f6f8fa;
   height: 1000px;
   right: 0;
 }
@@ -20,4 +19,5 @@
   display: flex;
   min-height: 100vh;
   height: auto;
+  overflow: hidden;
 }

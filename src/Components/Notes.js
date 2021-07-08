@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import BookOutlined from "@material-ui/icons/BookOutlined";
 import SummaryBox from "./SummaryBox";
+import NoContent from "./NoContent";
 
 export default function Notes(props) {
-  const { isMySchool, schoolId } = props;
+  const { isMyProfile, username } = props;
   return (
     <div>
       <div className="school-header">
@@ -28,8 +29,8 @@ export default function Notes(props) {
           style={{ border: "1px solid #dbdbdb" }}
           modalHeader="something"
         />
-        {isMySchool ? (
-          <Link className="new-school" to={`/school/${schoolId}/courses/new`}>
+        {isMyProfile ? (
+          <Link className="new-school" to={`/no`}>
             <BookOutlined />
             New
           </Link>
@@ -37,18 +38,18 @@ export default function Notes(props) {
           ""
         )}
       </div>
-      <div className="no-courses">
-        <div className="no-note-logo no-logo"></div>
-        <h2>This school don't have any course yet.</h2>
-        <div className="newBtn">
-          <Link className="new-school" to={`notes/new`}>
-            <BookOutlined />
-            New Note
-          </Link>
-
-          <a href="/learn-more">Learn more</a>
-        </div>
-      </div>
+      <NoContent
+        msg={
+          isMyProfile
+            ? "You don't have any note yet."
+            : `${username} doesn't have any note yet.`
+        }
+        myProfile={isMyProfile}
+        buttonText="New Note"
+        btnLink="/new/note"
+        Icon={BookOutlined}
+        logoClass="no-note-logo"
+      />
     </div>
   );
 }

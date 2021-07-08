@@ -403,7 +403,19 @@ export default function Profile(props) {
                     />
                   )}
                 />
-                <Route path={`/${username}/notes`} component={Notes} />
+                <Route
+                  path={`/${username}/notes`}
+                  render={() => (
+                    <Notes
+                      username={username}
+                      userId={id}
+                      user={user}
+                      isMyProfile={my_profile}
+                      {...props}
+                      headRef={ref}
+                    />
+                  )}
+                />
               </div>
             </div>
           </div>

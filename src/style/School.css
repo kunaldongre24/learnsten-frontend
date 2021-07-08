@@ -80,7 +80,6 @@
   padding: 24px;
   padding-bottom: 36px;
   text-align: center;
-  border-bottom: 1px solid #e1e4e8;
 }
 .no-courses h2 {
   font-weight: 600;
@@ -108,15 +107,7 @@
 .newBtn .new-school {
   margin: 12px 0;
 }
-.no-courses {
-  padding: 24px;
-  padding-bottom: 36px;
-  text-align: center;
-  border-bottom: 1px solid #eaeaea;
-}
-.no-courses h2 {
-  font-weight: 600;
-}
+
 .no-logo {
   margin: auto;
   height: 120px;

@@ -59,7 +59,27 @@ export async function getSubcategoriesByCategoryId(categoryId) {
   );
   return response;
 }
-
+export async function getSectionsByCourseId(courseId) {
+  const response = await axios.get(
+    `http://localhost:8000/api/v1/section/${courseId}`,
+    { withCredentials: true }
+  );
+  return response;
+}
+export async function getLecturesBySectionId(sectionId) {
+  const response = await axios.get(
+    `http://localhost:8000/api/v1/lecture/${sectionId}`,
+    { withCredentials: true }
+  );
+  return response;
+}
+export async function deleteLecture(lectureId) {
+  const response = await axios.delete(
+    `http://localhost:8000/api/v1/lecture/${lectureId}`,
+    { withCredentials: true }
+  );
+  return response;
+}
 // export async function login(id) {
 //   return await resolve(
 //     axios.get(`http://some-api.com/users/${id}`).then((res) => res.data)

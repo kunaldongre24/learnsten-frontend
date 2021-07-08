@@ -5,9 +5,10 @@ import { timeSince } from "./Utils";
 import VideoLibraryOutlinedIcon from "@material-ui/icons/VideoLibraryOutlined";
 import Loader from "./Loader";
 import { getCoursesByUserId } from "./Api";
+import NoContent from "./NoContent";
 
 function CoursesList(props) {
-  const { userId, isMyProfile } = props;
+  const { userId, isMyProfile, username } = props;
   const [courses, setCourses] = useState([]);
   const [loader, setLoader] = useState(false);
   useEffect(() => {
@@ -86,9 +87,9 @@ function CoursesList(props) {
                   <div className="last-row">
                     <div className="box">
                       <span className="followers">
-                        {course.lectureCount}{" "}
+                        {course.lecture_count}{" "}
                         <span className="text">
-                          {course.lectureCount === 1 ? "course" : "courses"}
+                          {course.lecture_count === 1 ? "course" : "courses"}
                         </span>
                       </span>
                       {" · "}
@@ -108,21 +109,18 @@ function CoursesList(props) {
             )
           )
         ) : (
-          <div className="no-courses">
-            <div className="no-course-logo no-logo"></div>
-            <h2>This school don't have any course yet.</h2>
-            <div className="newBtn">
-              {isMyProfile ? (
-                <Link className="new-school" to={`/new`}>
-                  <VideoLibraryOutlinedIcon />
-                  New Course
-                </Link>
-              ) : (
-                ""
-              )}
-              <a href="/learn-more">Learn more</a>
-            </div>
-          </div>
+          <NoContent
+            msg={
+              isMyProfile
+                ? "You don't have any course yet."
+                : `${username} doesn't have any course yet.`
+            }
+            myProfile={isMyProfile}
+            buttonText="New Course"
+            btnLink="/new"
+            logoClass="no-course-logo"
+            Icon={VideoLibraryOutlinedIcon}
+          />
         )}
       </div>
     </div>

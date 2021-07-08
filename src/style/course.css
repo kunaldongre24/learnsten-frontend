@@ -1,7 +1,8 @@
 .top-heading {
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
 }
+
 .dim-text {
   font-size: 14px;
   margin-top: 8px;
@@ -114,4 +115,90 @@
 }
 h1 a {
   color: #030303;
+}
+.course-desc h1 {
+  font-weight: 600;
+  font-size: 20px;
+}
+.course-desc {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.desc-content {
+  margin-top: 8px;
+}
+.desc-content li {
+  list-style-position: inside;
+}
+.course-header {
+  height: 60px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: #1e1e1c;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 16%);
+  z-index: 500;
+  padding: 0 30px;
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.name-header {
+  font-weight: bold;
+  white-space: nowrap;
+}
+.info-header {
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+}
+.rating-num {
+  color: rgb(255, 174, 0);
+  font-weight: bold;
+  margin: 0 5px;
+}
+.notify-header {
+  height: 60px;
+  width: 100%;
+  background-color: #ffe799;
+  display: block;
+  display: flex;
+  z-index: 700;
+  position: relative;
+}
+.notify-content {
+  padding: 5px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.remove-notification {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 60px;
+  cursor: pointer;
+}
+.outline {
+  border: 1px solid #e1e3e8;
+  margin-top: 4px;
+  border-radius: 4px;
+}
+h1 {
+  font-weight: 600;
+  font-size: 18px;
+}
+.right-container ul {
+  list-style-position: inside;
+  font-size: 14px;
+  padding-top: 8px;
+}
+.right-container ul li {
+  line-height: 2;
 }

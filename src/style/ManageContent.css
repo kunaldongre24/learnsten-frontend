@@ -1,0 +1,247 @@
+.mc-container {
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+  padding: 16px;
+  font-size: 14px;
+}
+.setting-heading {
+  padding-bottom: 16px;
+}
+
+.setting-info {
+  padding: 20px;
+  background: #f0f5fa;
+  display: flex;
+  color: #0c4a55;
+}
+.mc-container .text-info {
+  margin-top: 20px;
+  display: block;
+}
+.lst-section {
+  width: 100%;
+  padding: 10px;
+  background: #f0f5fa;
+  border: 1px solid #e1e3e8;
+}
+.lst-lecture {
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #e1e3e8;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+.flex-head {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+}
+.flex-head:hover > button {
+  display: block;
+}
+.lst-flex {
+  display: flex;
+}
+.lecture-heading,
+.section-title {
+  display: flex;
+  align-items: center;
+}
+.section-title {
+  margin-left: 4px;
+}
+.section-title svg {
+  margin-right: 4px;
+}
+.lecture-heading svg {
+  margin-right: 5px;
+}
+.mw-2 {
+  max-width: 1012px;
+  margin: auto;
+}
+.delete-btn,
+.edit-btn {
+  background: transparent;
+  border: none;
+  margin-left: 4px;
+  padding: 0 4px;
+  display: none;
+}
+.lst-lecture-left button:hover {
+  background: #f1f1f1;
+}
+.lst-lecture-left:hover > button {
+  display: block;
+}
+.lst-lecture-left {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.lst-lecture-right {
+  width: 100px;
+}
+.lst-lecture-right button {
+  width: 100%;
+  height: 32px;
+  background: #fff;
+  border: 1px solid #278799;
+  color: #278799;
+  border-radius: 2px;
+}
+.box-list {
+  border: 1px solid #e1e3e8;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.nb-2 .selected .list-element {
+  background: #fff;
+  border-radius: 0;
+  color: #24292e;
+  border-top: none;
+  border-left: 3px solid #fba52f;
+}
+.nb-2 a .list-element,
+.nb-2 .list-element {
+  height: 38px;
+  padding: 8px 16px;
+  border-bottom: 1px solid #e1e3e8;
+}
+.section-heading {
+  white-space: nowrap;
+  margin: 5px 10px 5px 5px;
+}
+.nb-2 .list-element:hover {
+  background: #f6f8fa;
+}
+.nb-2 a:last-child .list-element {
+  border-bottom: 0;
+}
+.mc-container h2 {
+  font-weight: 600;
+  width: 100%;
+  border-bottom: 1px solid #e1e3e8;
+  padding-bottom: 12px;
+}
+.hidden {
+  display: none !important;
+}
+.edit-section {
+  width: 100%;
+  border: 1px solid #e1e3e8;
+  margin-bottom: 30px;
+  background: #fff;
+  padding: 10px;
+}
+.course-input {
+  width: 100%;
+}
+.course-input input {
+  display: block;
+  padding: 8px 10px;
+  width: 100%;
+  border-radius: 2px;
+  border: 1px solid #dbdbdb;
+  margin-bottom: 15px;
+}
+.course-input label {
+  margin-bottom: 4px;
+  display: block;
+  font-size: 13px;
+}
+.saveBtn {
+  background: #278799;
+  color: #fff;
+}
+.course-buttons {
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+.cancelBtn {
+  background: #fff;
+  color: #278799;
+  margin-right: 10px;
+}
+.btn {
+  border: none;
+  padding: 8px;
+  border-radius: 2px;
+  font-family: 14px;
+}
+.lecture-content {
+  width: 100%;
+}
+.new-course-btn {
+  min-height: 30px;
+  margin-top: 5px;
+}
+.new-course-btn button.dashed {
+  height: 28px;
+  padding: 0 5px;
+  border: 1px dashed #cacbcc;
+  font-size: 12px;
+  color: #0c4a55;
+  background: #fff;
+  margin-left: -20px;
+  position: relative;
+  z-index: 100;
+  opacity: 0;
+  transition: 0.2s ease;
+  box-shadow: none;
+  margin-right: 20px;
+}
+.visible {
+  opacity: 1 !important;
+}
+.btn-text::before {
+  transition: all 500ms;
+  content: "";
+  position: absolute;
+  right: -11px;
+  top: 2px;
+  height: 21px;
+  width: 21px;
+  background: #fff;
+  border: 1px dashed #cacbcc;
+  border-bottom: none;
+  border-left: none;
+  transform: rotate(35deg) skew(-15deg);
+  z-index: -1;
+}
+
+.new-course-btn:hover > button {
+  opacity: 1;
+}
+.btn-text {
+  display: flex;
+}
+
+.content-type {
+  padding: 4px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border: 1px dashed #cacbcc;
+  background: #fff;
+}
+
+.content-type button {
+  display: flex;
+  align-items: center;
+  color: #278799;
+  border: none;
+  background: #fff;
+  margin-right: 10px;
+  padding: 5px;
+}
+.content-type button:hover {
+  background: #f5f5f5;
+  color: #0c4a55;
+}
+.content-type button svg {
+  margin-right: 5px;
+}

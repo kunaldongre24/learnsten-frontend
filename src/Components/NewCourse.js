@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../style/NewSchool.css";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -506,7 +506,7 @@ function NewCourse(props) {
                   src={`http://localhost:8000/${croppedImg.path}`}
                   style={{ width: "100%", border: "1px solid #eaeaea" }}
                   className="image-upload"
-                  alt="cropped image"
+                  alt="cropped"
                 />
               ) : (
                 <ReactCrop

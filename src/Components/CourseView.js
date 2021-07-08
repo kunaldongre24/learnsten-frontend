@@ -7,6 +7,7 @@ import ReplyIcon from "@material-ui/icons/Reply";
 import InfoIcon from "@material-ui/icons/Info";
 import StarRatings from "react-star-ratings";
 import Cookies from "js-cookie";
+import NoContent from "./NoContent";
 
 import {
   getCourseById,
@@ -25,6 +26,7 @@ export default function CourseView(props) {
   const [owner, setOwner] = useState({});
   const [subjects, setSubjects] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [notification, setNotification] = useState({ bool: false, msg: "" });
   useEffect(() => {
     setLoading(true);
     const fetchCourseData = async () => {
@@ -39,6 +41,16 @@ export default function CourseView(props) {
       setCourse({});
     };
   }, [courseId]);
+  useEffect(() => {
+    if (course.lecture_count) {
+      setNotification({ bool: false, msg: "" });
+    } else {
+      setNotification({
+        bool: true,
+        msg: "This course will be visible on learnsten after you put some content in it.",
+      });
+    }
+  }, [course]);
   const fetchOwnerData = async (userId) => {
     const response = await getUserById(userId);
     setOwner(response.data[0]);
@@ -53,10 +65,64 @@ export default function CourseView(props) {
   const iconStyle = { fontSize: "16px", marginRight: "10px", color: "#64DE98" };
 
   const { username } = owner;
-  const { name, last_updated, ownerId, subtitle, language, course_image_url } =
-    course;
+  const {
+    name,
+    last_updated,
+    ownerId,
+    subtitle,
+    language,
+    course_image_url,
+    description,
+  } = course;
   return (
     <div className="profile-all no-sidebar">
+      <div className="course-header">
+        <div className="name-header">{name}</div>
+        <div className="info-header">
+          <svg
+            viewBox="0 0 51 48"
+            className="widget-svg"
+            style={{
+              width: "18px",
+              height: "18px",
+              transition: " transform 0.2s ease-in-out 0s",
+            }}
+          >
+            <path
+              className="star"
+              d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z"
+              style={{
+                fill: "rgb(255, 174, 0)",
+                transition: "fill 0.2s ease-in-out 0s",
+              }}
+            ></path>
+          </svg>
+          <span className="rating-num">4.5</span>
+          <span className="other">(1,342) &nbsp;12,232 students</span>
+        </div>
+      </div>
+      {notification.bool ? (
+        <div className="notify-header">
+          <div className="notify-content">{notification.msg}</div>
+          <span
+            className="remove-notification"
+            onClick={() => setNotification({ bool: false, msg: "" })}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="18px"
+              viewBox="0 0 24 24"
+              width="18px"
+              fill="#000000"
+            >
+              <path d="M0 0h24v24H0V0z" fill="none"></path>
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
+            </svg>
+          </span>
+        </div>
+      ) : (
+        ""
+      )}
       {course ? (
         <div className="content course-view">
           <div
@@ -147,9 +213,17 @@ export default function CourseView(props) {
                     alt="course-preview"
                   />
                   <div className="side-course">
-                    <button className="course-btn full-theme">
-                      {"Join this course"}
-                    </button>
+                    {ownerId === parseInt(c_id) ? (
+                      <Link to={`/course/${courseId}/manage`}>
+                        <button className="course-btn full-theme">
+                          Manage Course
+                        </button>
+                      </Link>
+                    ) : (
+                      <button className="course-btn full-theme">
+                        Join this course
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -164,21 +238,46 @@ export default function CourseView(props) {
               <Loader />
             ) : (
               <div className="expand">
-                <div className="left-container as">
+                <div className="left-container as" style={{ width: "66.66%" }}>
+                  <div className="course-desc">
+                    <h1>Description</h1>
+                    <div
+                      className="desc-content"
+                      dangerouslySetInnerHTML={{
+                        __html: description,
+                      }}
+                    ></div>
+                  </div>
                   <h1 className="top-heading">Course content</h1>
-                  <div className="no-lecture">
-                    <h1>
-                      {parseInt(c_id) === ownerId
-                        ? "You don't"
-                        : `${username} doesn't`}{" "}
-                      have any lectures
-                    </h1>
+                  <div className="outline">
+                    <NoContent
+                      msg="This course don't have any content yet."
+                      myProfile={ownerId === parseInt(c_id)}
+                      buttonText="Add Content"
+                      btnLink={`/course/${courseId}/manage`}
+                    />
                   </div>
                 </div>
                 <div
                   className="right-container as"
-                  style={{ width: "30%", padding: "0" }}
-                ></div>
+                  style={{
+                    width: "33%",
+                    padding: "16px",
+                    margin: "16px 0",
+                    border: "1px solid #e1e3e8",
+                  }}
+                >
+                  <h1>This course includes</h1>
+                  <ul>
+                    <li>6 hours on-demand video</li>
+                    <li>10 articles</li>
+                    <li>4 downloadable resources</li>
+                    <li>Full lifetime access</li>
+                    <li>Access on mobile and TV</li>
+                    <li>Assignments</li>
+                    <li>Certificate of completion</li>
+                  </ul>
+                </div>
               </div>
             )}
           </div>
